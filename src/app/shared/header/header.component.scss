@@ -5,6 +5,7 @@ $text-muted: #64748b;
 
 .modern-sidenav {
   --background: #{$bg-light};
+  font-family: var(--ion-font-family) !important;
 
   .user-profile-hero {
     position: relative;
@@ -246,14 +247,25 @@ $text-muted: #64748b;
 
   ion-menu-button,
   .notifications-btn {
-    width: 46px;
-    height: 46px;
+    width: 52px;
+    height: 52px;
     --background: #fff;
     background: #fff;
     border-radius: 50%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     color: $primary-purple;
     border: none;
+  }
+
+  ion-menu-button {
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+  }
+
+  ion-menu-button::part(icon) {
+    font-size: 28px;
   }
 
   .notifications-btn {

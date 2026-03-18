@@ -39,7 +39,7 @@ export class GMapsService {
       const script = document.createElement('script');
       let timeoutHandle: any;
 
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsAPIKey}&v=weekly&libraries=places&loading=async`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsAPIKey}&v=weekly&libraries=places,marker&loading=async`;
       script.async = true;
       script.defer = true;
       script.setAttribute('data-gmaps-loader', 'true');

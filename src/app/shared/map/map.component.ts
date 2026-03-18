@@ -26,9 +26,9 @@ const activeRideMarker = {
 };
 
 const evegahZoneMarker = {
-  icon: 'assets/images/evegah-zone-1.png',
-  sizeX: 45,
-  sizeY: 45
+  icon: 'assets/vechicle.png',
+  sizeX: 54,
+  sizeY: 54
 };
 
 const mapStylesOptions = [
@@ -578,6 +578,18 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
     this.zones.map(async (zone) => {
 
       const zoneLocation = new googleMaps.LatLng(zone.latitude, zone.longitude);
+      const advancedMarker = this.createAdvancedZoneMarker(googleMaps, zoneLocation);
+
+      if (advancedMarker) {
+        advancedMarker.addListener('gmp-click', (event: any) => {
+          const mapsMouseEvent = { latLng: event?.latLng || zoneLocation };
+          this.handleMarkerClick(mapsMouseEvent, false, zone);
+        });
+        advancedMarker.map = this.map;
+        this.zoneMarkers.push(advancedMarker);
+        return;
+      }
+
       const zoneIcon = {
         url: evegahZoneMarker.icon,
         scaledSize: new googleMaps.Size(evegahZoneMarker.sizeX, evegahZoneMarker.sizeY),
@@ -599,10 +611,50 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
 
   }
 
+  private createAdvancedZoneMarker(googleMaps: any, position: any) {
+    const AdvancedMarkerElement = googleMaps?.marker?.AdvancedMarkerElement;
+    if (!AdvancedMarkerElement) {
+      return null;
+    }
+
+    const content = document.createElement('div');
+    content.style.width = `${evegahZoneMarker.sizeX}px`;
+    content.style.height = `${evegahZoneMarker.sizeY}px`;
+    content.style.borderRadius = '50%';
+    content.style.background = '#6c45be';
+    content.style.boxShadow = '0 10px 22px rgba(0,0,0,0.18)';
+    content.style.border = '3px solid #ffffff';
+    content.style.display = 'flex';
+    content.style.alignItems = 'center';
+    content.style.justifyContent = 'center';
+
+    const img = document.createElement('img');
+    img.src = evegahZoneMarker.icon;
+    img.alt = 'vehicle';
+    img.style.width = '72%';
+    img.style.height = '72%';
+    img.style.objectFit = 'contain';
+    img.style.borderRadius = '50%';
+    img.style.display = 'block';
+    img.style.pointerEvents = 'none';
+
+    content.appendChild(img);
+
+    return new AdvancedMarkerElement({
+      position,
+      content,
+      zIndex: 10
+    });
+  }
+
   private clearZoneMarkers() {
     this.zoneMarkers.forEach((marker: any) => {
       try {
-        marker.setMap(null);
+        if (typeof marker?.setMap === 'function') {
+          marker.setMap(null);
+        } else {
+          marker.map = null;
+        }
       } catch {
         // ignore stale marker cleanup errors
       }
