@@ -1,0 +1,439 @@
+ion-content {
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+}
+
+.device-second {
+  display: flex;
+  padding: 5px;
+  justify-content: space-between;
+  align-items: center;
+  align-items: center;
+  margin-left: 10px;
+  border-radius: 10px;
+  box-shadow: none;
+
+  .long-card-two {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+.meter-btn {
+  background-color: #fff !important;
+}
+
+// FIRST PAGE CSS----------///////////---------------- //
+.icon-mainCard {
+  border: 1px solid #7100dd;
+  margin: 15px;
+  padding: 10px;
+  margin-top: 3rem;
+  border-radius: 30px;
+}
+
+.device-card {
+  display: flex;
+  align-items: center;
+  border-radius: 15px 0px;
+  margin: 5px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.27);
+  min-height: 85px;
+  padding: 3px;
+
+  ion-icon {
+    font-size: 28px;
+    color: #2a195c;
+    padding: 5px 5px 0px 10px;
+  }
+}
+
+.light-control-card {
+  display: flex;
+  border-radius: 15px 0px;
+  margin: 5px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.27);
+  min-height: 85px;
+  column-gap: 10px;
+  padding: 6px 13px;
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+
+    h4 {
+      font-weight: bolder;
+      margin: 0;
+      font-size: 14px;
+      color: #000;
+      padding-bottom: 7px;
+      font-family: 'Poppins', sans-serif !important;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  ion-icon {
+    font-size: 28px;
+    color: #2a195c;
+  }
+}
+
+.img-device {
+  width: 40px;
+  height: 20px;
+}
+
+.device-section {
+  margin-left: 6px;
+
+  h4 {
+    font-weight: bolder;
+    margin: 0;
+    font-size: 14px;
+    color: #000;
+    padding-bottom: 7px;
+    font-family: 'Poppins', sans-serif !important;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
+
+.long-card-sec {
+  h5 {
+    margin: 0;
+    font-size: 15px;
+    color: #000;
+  }
+
+  span {
+    font-size: 11px;
+    color: #6b6b6b;
+  }
+}
+
+.long-card-two {
+  ion-icon {
+    font-size: 25px;
+    color: #2a195c;
+  }
+
+  p {
+    width: 80px;
+    height: 36px;
+    text-align: center;
+    padding: 10px;
+    color: #000;
+    font-weight: 600;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+}
+
+.charges-label {
+  font-size: 20px;
+  color: #000;
+}
+
+.prize-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+ion-button {
+  margin: 0 auto;
+  height: 50px;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 90%;
+}
+
+agm-map {
+  height: 55vh;
+}
+
+.ionic-icon-card {
+  font-size: 50px;
+  transform: rotate(270deg);
+  color: #000;
+}
+
+.modal-name {
+  font-size: 17px;
+  margin: 12px 13px;
+  color: #000;
+  font-weight: 600;
+}
+
+ion-button {
+  --background: #2a195c;
+  height: 5rem;
+  text-transform: capitalize !important;
+  --border-radius: 0rem;
+  width: 100%;
+  margin: 0rem;
+}
+
+.amount {
+  font-weight: 800 !important;
+}
+
+.successPay {
+  text-align: center;
+  color: #36701f;
+}
+
+.timeRemainHead {
+  font-size: 17px;
+  margin: 0px 0px 15px;
+  color: #333;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+
+  .timeCount {
+    color: #2a195c;
+    font-weight: 600;
+    font-size: 18px;
+  }
+}
+
+h1 {
+  margin-top: 10px;
+}
+
+.timeExtraHead {
+  color: #eb445a;
+  font-size: 15px;
+  margin: 0;
+  border: 1px solid #eb445a;
+  display: inline-block;
+  padding: 7px;
+  border-radius: 20px;
+}
+
+.paybtn {
+  margin-bottom: 20px;
+}
+
+.innerCard {
+  background-color: #fff;
+  padding: 15px 10px;
+  margin: -15px 0px;
+  border-radius: 19px 19px 0px 0px;
+}
+
+.loader-css-class {
+  --background: #261bff;
+  --spinner-color: #ffffff;
+}
+
+.statusLable {
+  font-size: 18px;
+
+  .online {
+    color: #2a195c;
+    font-size: 20px;
+    margin-left: 3px;
+  }
+
+  .offline {
+    color: red;
+    font-size: 20px;
+    margin-left: 3px;
+  }
+}
+
+.unlocking-ride-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 20px;
+  height: 250px;
+  align-items: center;
+
+  &.compact {
+    height: fit-content;
+    padding: 20px 0;
+  }
+
+  .unlocking-message {
+    font-size: 15px;
+    text-align: center;
+    color: #000000;
+    width: 85%;
+  }
+}
+
+.lockUnlockContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column-gap: 10px;
+  column-gap: 10px;
+  font-size: 14px;
+
+  input {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.btn-row {
+  padding: 0px;
+}
+
+.map {
+  height: 57vh;
+}
+
+.lockBtn {
+  --background: #2a195c;
+}
+
+.lightBtnon {
+  --background: #2a195c;
+  border-radius: 15px 0px;
+  --border-radius: 15px 0px;
+  margin: 5px;
+  width: 95%;
+  color: #fff;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.27);
+  --box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.27);
+  min-height: 70px;
+
+  ion-icon {
+    font-size: 28px;
+    color: #fff;
+    padding: 5px 5px 0px 10px;
+  }
+
+  span {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+    font-family: 'Poppins', sans-serif !important;
+  }
+
+  p {
+    margin-top: 10px;
+  }
+
+}
+
+.lightBtnof {
+  --background: #fff;
+  border-radius: 15px 0px;
+  --border-radius: 15px 0px;
+  color: #333;
+  margin: 5px;
+  width: 95%;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.27);
+  --box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.27);
+  min-height: 70px;
+  --padding-inline-start: 0px !important;
+  --padding-inline-end: 0px !important;
+
+  ion-icon {
+    font-size: 28px;
+    color: #2a195c;
+    padding: 5px 5px 0px 10px;
+  }
+
+  span {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: #000;
+    font-family: "Poppins", sans-serif !important;
+  }
+
+  p {
+    margin-top: 10px;
+  }
+}
+
+.toggle-icon {
+  width: 60px !important;
+}
+
+.unlockAlert {
+  border-bottom: 1px solid #2a195c87;
+  background-color: #fff;
+  z-index: 9;
+  position: relative;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.mcancel {
+  width: 50%;
+  margin: 0 auto;
+  --border-radius: 30px;
+  border-radius: 30px;
+}
+
+.switchToggle {
+  position: relative;
+  display: inline-block;
+  width: 76px;
+  height: 44px;
+
+  .toggleInput {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &.checked+.slider {
+      background-color: #2a195c;
+    }
+
+    &.checked+.slider::before {
+      -webkit-transform: translateX(32px);
+      -ms-transform: translateX(32px);
+      transform: translateX(32px);
+    }
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+
+    &::before {
+      position: absolute;
+      content: "";
+      height: 34px;
+      width: 34px;
+      left: 5px;
+      bottom: 5px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+  }
+
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+}

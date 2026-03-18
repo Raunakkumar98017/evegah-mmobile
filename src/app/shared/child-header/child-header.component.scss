@@ -1,0 +1,98 @@
+ion-button {
+  background-color: #000;
+
+  i {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bolder;
+    margin-left: 1rem;
+  }
+
+  ion-title {
+    font-size: 1.8rem;
+  }
+
+  .alert {
+    position: absolute;
+    top: 0rem;
+    right: -0.7rem;
+    background: #7100dd;
+    display: inline-block;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    font-size: 10px;
+
+    &~ion-icon {
+      margin-right: 1.2rem;
+    }
+  }
+}
+
+.notify {
+  background: #7100dd;
+  color: #fff;
+  width: 4rem;
+}
+
+ion-header {
+  ion-back-button {
+    --background: #fff;
+    border-radius: 50%;
+    --border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    color: #2a195c;
+    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
+    margin-left: 5px;
+    --icon-font-size: 24px;
+
+  }
+
+  h5 {
+    font-size: 1.7rem;
+    margin: 1rem 0rem;
+    margin-left: 2rem;
+    color: #000;
+    font-family: 'Poppins', sans-serif !important;
+    --font-family: 'Poppins', sans-serif !important;
+  }
+
+
+  .header {
+    --background: #fff;
+    min-height: 6.5rem;
+
+    .heading {
+      font-size: 2rem;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .close {
+      font-size: 2.5rem;
+      margin-right: 1rem;
+      color: #7100dd;
+    }
+  }
+
+  .brandHeading {
+    padding-left: 0;
+  }
+}
+
+.payBtn {
+  --background: #7100dd;
+  color: #fff;
+  text-transform: capitalize;
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin-left: 1.5rem;
+}
+
+.topHeader {
+  z-index: 0 !important;
+  position: absolute;
+  padding: 10px;
+}

@@ -1,0 +1,46 @@
+<ion-header class="ion-no-border">
+  <app-child-header></app-child-header>
+</ion-header>
+
+<ion-content [fullscreen]="true" [class.scanner-mode]="scanActive">
+  <div class="main-container">
+    <section class="topContent">
+      <div class="instruction-card">
+        <h2 class="title">Scan QR Code</h2>
+        <p class="subtitle">Place the QR code inside the frame to scan automatically.</p>
+        
+        <div class="scan-wrapper">
+          <div class="scan-box">
+            <div class="corner top-left"></div>
+            <div class="corner top-right"></div>
+            <div class="corner bottom-left"></div>
+            <div class="corner bottom-right"></div>
+            <div class="scan-line"></div>
+          </div>
+        </div>
+
+        <div class="manual-entry-section" *ngIf="deviceenter">
+          <ion-item lines="none" class="custom-input">
+            <ion-input type="text" placeholder="Enter Bike Number" [(ngModel)]="enteredLockNumber"></ion-input>
+          </ion-item>
+          <ion-button expand="block" class="primary-btn" (click)="findVehicle()">
+            Find Vehicle
+          </ion-button>
+        </div>
+
+        <div class="footer-actions">
+          <button (click)="enterById()" class="keyboardBtn" [class.active]="deviceenter">
+            <ion-icon [name]="deviceenter ? 'camera-outline' : 'keypad-outline'"></ion-icon>
+          </button>
+          <p class="help-text">
+            {{ deviceenter ? 'Switch back to camera scan' : 'Trouble scanning? Tap to enter ID manually.' }}
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <app-footer></app-footer>
+</ion-footer>

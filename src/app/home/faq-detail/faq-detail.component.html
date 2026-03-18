@@ -1,0 +1,34 @@
+<ion-header class="childHeadermain">
+  <app-child-header [title]="'FAQs'"></app-child-header>
+</ion-header>
+
+<ion-content class="faqDetailPage">
+
+  <!-- <div class="breadcrumbHeader">
+    <label class="faqLink" (click)="handleFaqLinkClick()">FAQs</label>
+    <span>&#62;</span>
+    <label>{{faqDetail?.sectionName}}</label>
+  </div> -->
+
+  <h1 class="faqSectionName">{{faqDetail?.sectionName}}</h1>
+
+  <div class="questionsList" *ngIf="questionDetails.length !== 0">
+
+    <div class="questionContainer" *ngFor="let questionItem of questionDetails">
+      <div class="question" (click)="handleQuestionExpand(questionItem)" [class.expanded]="questionItem.isExpanded">
+        <label>{{questionItem.question}}</label>
+        <ion-icon name="chevron-down-outline" *ngIf="questionItem.isExpanded === false"></ion-icon>
+        <ion-icon name="chevron-up-outline" *ngIf="questionItem.isExpanded === true"></ion-icon>
+      </div>
+      <div class="answer" *ngIf="questionItem.isExpanded === true">
+        <div [innerHtml]="convertRawTextToHTML(questionItem.answer)"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="noFaqsSection" *ngIf="questionDetails.length === 0">
+    <label>No FAQs available!</label>
+  </div>
+
+</ion-content>

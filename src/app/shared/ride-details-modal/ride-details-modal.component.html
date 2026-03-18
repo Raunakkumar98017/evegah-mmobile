@@ -1,0 +1,77 @@
+<ion-header class="modalHeader">
+  <ion-toolbar>
+    <ion-title>Ride Details</ion-title>
+    <ion-icon name="close-outline" (click)="closeModal()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img src="../../../assets/images/EV-final-logo.png" alt="logo" class="brandLogo">
+
+  <ion-list class="ion-no-padding">
+
+    <ion-item lines="none" class="itemDetails">
+      <ion-label class="label">Ride Number</ion-label>
+      <ion-label class="value">{{rideDetails.rideBookingNo}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" class="itemDetails">
+      <ion-label class="label">Modal Name</ion-label>
+      <ion-label class="value">{{rideDetails.modelName}}</ion-label>
+    </ion-item>
+
+    <ion-button expand="full" class="seeMoreLessControl" *ngIf="showMore === false"
+      (click)="showMoreLessClickHandler()">
+      See more details <ion-icon name="chevron-down-outline"></ion-icon>
+    </ion-button>
+
+    <div *ngIf="showMore === true">
+
+      <ion-item lines="none" class="itemDetails">
+        <ion-label class="label">Ride started from</ion-label>
+        <ion-label class="value">{{fromTime}}</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="itemDetails">
+        <ion-label class="label">Ride ended at</ion-label>
+        <ion-label class="value">{{endTime}}</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="itemDetails">
+        <ion-label class="label">Ride Duration (minutes)</ion-label>
+        <ion-label class="value">{{rideDetails.totalDurationInMinutes}}</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="itemDetails">
+        <ion-label class="label">Minimum hire time (minutes)</ion-label>
+        <ion-label class="value">{{rideDetails.minimumHireTime}}</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="itemDetails">
+        <ion-label class="label">Rate</ion-label>
+        <ion-label class="value">{{rideDetails.rate}}</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="itemDetails">
+        <ion-label class="label">Total amount</ion-label>
+        <ion-label class="value">{{rideDetails.totalRideAmount}}</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="itemDetails">
+        <ion-label class="label">Remaining Wallet Amount</ion-label>
+        <ion-label class="value">{{rideDetails.remainingwalletAmount}}</ion-label>
+      </ion-item>
+
+      <ion-button expand="full" class="seeMoreLessControl" (click)="showMoreLessClickHandler()">
+        See less details <ion-icon name="chevron-up-outline"></ion-icon>
+      </ion-button>
+
+    </div>
+
+  </ion-list>
+
+  <div class="horizontalDivision"></div>
+
+  <app-rating-feedback [feedbackSubmitted]="feedbackSubmitted" [rideBookingId]="rideBookingId"
+    [rideDetails]="rideDetails" (onSkip)="onFeedbackSkip()" (onSubmit)="onFeedbackSubmit()"></app-rating-feedback>
+
+</ion-content>
+
+<ion-footer>
+  <ion-button class="success mb-1" *ngIf="showPayNow === true" (click)="payNow()">Pay
+    Now</ion-button>
+</ion-footer>

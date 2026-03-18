@@ -1,0 +1,53 @@
+{
+  "greet": {
+    "welcome": "RIDE THE REVOLUTION"
+  },
+  "common": {
+    "iAgreeTo": "By continuning , you agree to our",
+    "termsAndCondition": "Terms of use  & Privacy Policy",
+    "pleaseWait": "Please Wait...",
+    "requiredInformation": "Required Information"
+  },
+  "actions": {
+    "next": "Continue",
+    "back": "Back",
+    "proceed": "CONTINUE TO  RIDE",
+    "continue": "Continue"
+  },
+  "messages": {
+    "inCorrectMobileNumber": "This phone number is invalid. Please try again.",
+    "incorrectOtp": "Incorrect OTP",
+    "errorInSendingOtp": "Error in sending otp, Please try again!"
+  },
+  "sessionPages": {
+    "mobileNumberPage": {
+      "info": "A radical transformation of transport to make the world to be a better place to live!",
+      "placeholder": "Enter phone number"
+    },
+    "otpPage": {
+      "enterOtp": "Enter OTP",
+      "enter4DigitCode": "We have sent a verification code to",
+      "didntReceiveOtp": "Didn’t receive the OTP?",
+      "resendOtp": "Resend OTP",
+      "pleaseDoNotShareOtp": "Please do not share your OTP with others."
+    },
+    "registration": {
+      "yourName": "Your Name",
+      "userName": "Enter Full Name",
+      "state": "State",
+      "selectState": "Select State",
+      "city": "City",
+      "selectCity": "Select City",
+      "referralCode": "Referral Code",
+      "enterReferralCode": "Enter Referral Code",
+      "genderEnumId" : "gender",
+      "enterGenderEnumId": "Enter gender",
+      "address": "Address",
+      "enterAddress": "Enter Address",
+      "emailId": "Email",
+      "enterEmailId": "Enter your Email",
+      "dateOfBirth": "Date of Birth",
+      "enterDateOfBirth": "Enter Date of Birth"
+    }
+  }
+}

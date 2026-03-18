@@ -1,0 +1,17 @@
+<ion-content class="ion-padding">
+  <div class="walletField">
+    <ion-label class="balHeading">Topup Wallet</ion-label>
+    <ion-input label="₹" type="Number" type="number" placeholder="Enter Amount" name="enterAmount" ngDefaultControl
+      [(ngModel)]="enterAmount"></ion-input>
+    <div class="chiparea">
+      <ion-chip [outline]="true" (click)="handleTopUpControlClick(100)">+ 100</ion-chip>
+      <ion-chip [outline]="true" (click)="handleTopUpControlClick(200)">+ 200</ion-chip>
+      <ion-chip [outline]="true" (click)="handleTopUpControlClick(300)">+ 300</ion-chip>
+      <ion-chip [outline]="true" (click)="handleTopUpControlClick(500)">+ 500</ion-chip>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-button class="success" type="submit" (click)="addBalanceButton(enterAmount)">{{+this.availableAmount > 0 ? 'Add
+    more' : 'Deposit'}}</ion-button>
+</ion-footer>

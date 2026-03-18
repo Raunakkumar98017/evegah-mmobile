@@ -1,0 +1,650 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+
+@import '~@ionic/angular/css/core.css';
+/* Basic CSS for apps built with Ionic */
+
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
+@import './assets/pe-icon-7-stroke/css/helper.css';
+@import './assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css';
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+// Custom styling
+body,
+html {
+  font-size: 10px;
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+}
+
+:root {
+  --ion-font-family: 'Poppins', sans-serif;
+  --app-font-size-xs: 1.1rem;
+  --app-font-size-sm: 1.2rem;
+  --app-font-size-md: 1.4rem;
+  --app-font-size-lg: 1.6rem;
+  --app-font-size-xl: 1.8rem;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+*::before,
+*::after {
+  font-family: 'Poppins', sans-serif;
+}
+
+ion-content,
+ion-label,
+ion-input,
+ion-text,
+ion-title,
+p,
+span,
+small,
+button,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+a {
+  font-family: 'Poppins', sans-serif !important;
+  letter-spacing: 0.1px;
+}
+
+p,
+span,
+label,
+ion-label,
+ion-input,
+button,
+a {
+  font-size: var(--app-font-size-md);
+}
+
+h1 {
+  font-size: 2.6rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+h3 {
+  font-size: 1.9rem;
+}
+
+h4 {
+  font-size: 1.7rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-size: 1.3rem;
+}
+
+.footer-md::before {
+  background-image: inherit !important;
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: #fff;
+}
+
+.item-inner {
+  border: none !important;
+}
+
+.sc-ion-searchbar-md-h {
+  padding: 1.5rem;
+}
+
+ion-item {
+  --background: transparent;
+}
+
+.loader-css-class {
+  font-size: 14px;
+  line-height: 19px;
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+}
+
+ion-menu {
+  z-index: 99;
+  position: fixed;
+  background: #00000057;
+  backdrop-filter: blur(2px);
+}
+
+:host(.ion-color) .toolbar-background {
+  --background: #7100dd;
+}
+
+ion-button {
+  --box-shadow: none;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.alert-radio-icon.sc-ion-alert-md {
+  border-color: #333;
+}
+
+[aria-checked='true'].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md {
+  border-color: #7100dd;
+}
+
+.alert-radio-inner.sc-ion-alert-md {
+  background-color: #7100dd;
+}
+
+.alert-button.sc-ion-alert-md {
+  color: #333;
+}
+
+.simple-app-alert {
+  .alert-wrapper {
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 14px 34px rgba(16, 24, 40, 0.24);
+  }
+
+  .alert-head {
+    padding-top: 18px;
+    padding-bottom: 12px;
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2a195c;
+      letter-spacing: 0.2px;
+    }
+  }
+
+  .alert-message {
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+    color: #4b5563;
+    text-align: center;
+    padding: 16px 18px;
+  }
+
+  .alert-button-group {
+    justify-content: center;
+    padding: 12px 14px 16px;
+  }
+
+  .alert-button {
+    min-width: 110px;
+    border: 1px solid #2a195c;
+    border-radius: 12px;
+    color: #2a195c !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: #fff;
+  }
+}
+
+.alert-radio-label.sc-ion-alert-md {
+  padding-inline-start: 40px;
+}
+
+.header-md::after {
+  position: inherit;
+  background-image: inherit;
+}
+
+ion-header {
+  background-color: transparent;
+
+  ion-toolbar {
+    min-height: 5rem;
+    display: flex;
+  }
+}
+
+ion-button {
+  border-radius: 0.4rem;
+}
+
+ion-footer {
+  z-index: 0;
+  background: #fff;
+  color: #333;
+}
+
+.slider3 {
+  .swiper-slide {
+    margin-top: 2rem !important;
+
+    .caption {
+      display: none;
+    }
+
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+  }
+
+  .swiper-slide-next {
+    .caption {
+      display: block;
+    }
+
+    filter: inherit;
+    -webkit-filter: inherit;
+  }
+}
+
+@media screen and (min-width: 560px) and (max-width: 767px) {
+  .slider3 {
+
+    .swiper-slide-active,
+    .swiper-slide-duplicate {
+      width: 30% !important;
+      transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) !important;
+    }
+
+    .swiper-slide-next {
+      width: 40% !important;
+      margin-top: 0rem !important;
+    }
+  }
+}
+
+@media screen and (min-width: 440px) and (max-width: 559px) {
+  .slider3 {
+
+    .swiper-slide-active,
+    .swiper-slide-duplicate {
+      width: 29% !important;
+      transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) !important;
+    }
+
+    .swiper-slide-next {
+      width: 40% !important;
+      margin-top: 0rem !important;
+    }
+  }
+}
+
+@media screen and (min-width: 390px) and (max-width: 439px) {
+  .slider3 {
+
+    .swiper-slide-active,
+    .swiper-slide-duplicate {
+      width: 28.6% !important;
+      transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) !important;
+    }
+
+    .swiper-slide-next {
+      width: 40% !important;
+      margin-top: 0rem !important;
+    }
+  }
+}
+
+@media screen and (min-width: 340px) and (max-width: 389px) {
+  .slider3 {
+
+    .swiper-slide-active,
+    .swiper-slide-duplicate {
+      width: 27.9% !important;
+      transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) !important;
+    }
+
+    .swiper-slide-next {
+      width: 40% !important;
+      margin-top: 0rem !important;
+    }
+  }
+}
+
+@media screen and (min-width: 280px) and (max-width: 339px) {
+  .slider3 {
+
+    .swiper-slide-active,
+    .swiper-slide-duplicate {
+      width: 27.5% !important;
+      transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) !important;
+    }
+
+    .swiper-slide-next {
+      width: 40% !important;
+      margin-top: 0rem !important;
+    }
+  }
+}
+
+.ion-color-secondary {
+  --ion-color-base: #7100dd !important;
+  --ion-color-shade: #7100dd !important;
+  --ion-color-tint: #7100dd !important;
+}
+
+.searchbar-input.sc-ion-searchbar-md {
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.27);
+  --box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.27);
+  padding-inline-start: 50px;
+  padding-inline-end: 40px;
+  border-radius: 8px;
+  font-size: 15px;
+  height: 45px;
+}
+
+.searchbar-search-icon.sc-ion-searchbar-md {
+  top: 13px;
+  width: 2rem;
+  height: 2rem;
+}
+
+:host(.in-item) {
+  margin: 13px 0px !important;
+}
+
+ion-button {
+  font-size: 1.6rem !important;
+  letter-spacing: normal !important;
+  text-transform: capitalize !important;
+}
+
+.mat-step-header .mat-step-icon-selected {
+  background-color: #7100dd;
+  color: #fff;
+}
+
+.mat-horizontal-stepper-header {
+  padding: 0px !important;
+}
+
+.scroll-y {
+  padding: 0px !important;
+}
+
+.mat-horizontal-content-container {
+  padding: 0px !important;
+}
+
+.gmnoprint {
+  bottom: 221px !important;
+}
+
+
+.otpPage .sc-ion-input-md-h {
+  --padding-start: 0px !important;
+}
+
+.gm-svpc {
+  display: none !important;
+
+}
+
+.mat-dialog-container {
+  background-color: #673ab7 !important;
+  text-align: center !important;
+}
+
+.cdk-overlay-dark-backdrop,
+.backdrop-no-scroll {
+  background: rgb(215 215 215 / 17%);
+  backdrop-filter: blur(10px);
+}
+
+.sc-ion-modal-md {
+  --max-height: 330px;
+  --border-radius: 30px 30px 0px 0px;
+  bottom: 0;
+  position: absolute;
+}
+
+.scanToster {
+  height: 300px;
+  width: 400px;
+  margin: 0 auto;
+}
+
+.ion-padding {
+  padding: 10px !important;
+}
+
+.alert-button.sc-ion-alert-md {
+  color: #333;
+  background-color: #fff;
+  min-width: 100px;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  border: 1px solid #2A195C;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+}
+
+.alert-head.sc-ion-alert-md {
+  border-bottom: 1px solid #2a195c3e;
+  margin-bottom: 11px;
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+}
+
+.alert-button-group.sc-ion-alert-md {
+  border-top: 1px solid #2a195c3e;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+}
+
+.alert-button-inner.sc-ion-alert-md {
+  justify-content: center;
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+}
+
+.swiper-zoom-container {
+  min-height: 40vh !important;
+  max-height: 40vh !important;
+}
+
+.toolbar-background {
+  border-width: 0 !important;
+}
+
+.header-ios ion-toolbar:last-of-type {
+  --border-width: 0px !important;
+}
+
+ion-footer,
+ion-header {
+  box-shadow: none !important;
+}
+
+.input-highlight.sc-ion-input-md {
+  background: none;
+}
+
+.button-inner {
+  display: inline !important;
+}
+
+input:-internal-autofill-selected {
+  background-color: transparent !important;
+}
+
+.item-inner {
+  padding-inline-start: 0px !important;
+  padding-inline-end: 0px !important;
+}
+
+.alert-message.sc-ion-alert-md {
+  font-size: 1.6rem;
+  line-height: 1.3;
+  text-align: center;
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+}
+
+.alert-title.sc-ion-alert-md {
+  font-size: 1.8rem;
+  text-align: center;
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+}
+
+.modalHeader {
+  position: relative !important;
+  background-color: transparent !important;
+  display: flex;
+  padding: 15px;
+  border-bottom: 1px solid rgba(0, 216, 0, 0.3215686275);
+
+  ion-title {
+    font-size: 1.8rem;
+    color: #000;
+  }
+
+  ion-icon {
+    font-size: 30px;
+    color: red;
+  }
+}
+
+.item.sc-ion-label-md-h,
+.item .sc-ion-label-md-h {
+  white-space: inherit !important;
+}
+
+.ion-color-success {
+  --ion-color-base: #2a195c !important;
+  --ion-color-base-rgb: var(--ion-color-success-rgb, 45, 211, 111) !important;
+  --ion-color-contrast: var(--ion-color-success-contrast, #fff) !important;
+  --ion-color-contrast-rgb: var(--ion-color-success-contrast-rgb, 255, 255, 255) !important;
+  --ion-color-shade: #2a195c !important;
+  --ion-color-tint: #2a195c !important;
+}
+
+.toggle-icon {
+  width: 50px !important;
+}
+
+ion-toggle::part(track) {
+  height: 14px;
+  width: 50px;
+}
+
+.subHeadding {
+  margin: 15px 10px 0px;
+  font-size: 17px;
+}
+
+.childHeadermain {
+  .topHeader {
+    position: relative !important;
+    background-color: #fff !important;
+    border-bottom: 1px solid #2a195c61;
+  }
+}
+
+.wallet-amount-alert .alert-wrapper,
+.wallet-info-alert .alert-wrapper {
+  border-radius: 18px !important;
+  border: 1px solid #d8cffa !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f5ff 100%) !important;
+  box-shadow: 0 18px 34px rgba(42, 25, 92, 0.2) !important;
+}
+
+.wallet-amount-alert .alert-head,
+.wallet-info-alert .alert-head {
+  border-bottom: 1px solid #ebe3ff !important;
+  padding-top: 16px !important;
+  padding-bottom: 10px !important;
+}
+
+.wallet-amount-alert .alert-title,
+.wallet-info-alert .alert-title {
+  color: #2a195c !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+.wallet-amount-alert .alert-sub-title {
+  color: #6c6092 !important;
+  font-size: 13px !important;
+  margin-top: 4px !important;
+}
+
+.wallet-amount-alert .alert-input-group {
+  padding: 12px 16px 0 !important;
+}
+
+.wallet-amount-alert .alert-input {
+  border-radius: 12px !important;
+  border: 1px solid #d9cff7 !important;
+  background: #f8f4ff !important;
+  color: #2a195c !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.wallet-amount-alert .alert-button-group,
+.wallet-info-alert .alert-button-group {
+  padding: 12px !important;
+  gap: 8px !important;
+  border-top: 1px solid #ebe3ff !important;
+}
+
+.wallet-amount-alert .alert-button,
+.wallet-info-alert .alert-button {
+  min-width: 96px !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border: 1px solid #d8cffa !important;
+}
+
+.wallet-amount-alert .wallet-alert-cancel,
+.wallet-info-alert .wallet-alert-cancel {
+  background: #f8f5ff !important;
+  color: #6f668f !important;
+}
+
+.wallet-amount-alert .wallet-alert-confirm,
+.wallet-info-alert .wallet-alert-confirm {
+  background: #2a195c !important;
+  color: #fff !important;
+  border-color: #2a195c !important;
+}
+
+body.scanner-active,
+body.scanner-active ion-app,
+body.scanner-active app-root,
+body.scanner-active .ion-page,
+body.scanner-active ion-content {
+  background: transparent !important;
+  --background: transparent !important;
+}

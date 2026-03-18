@@ -1,0 +1,65 @@
+.searchable-select-main {
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+
+  .select-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    --background: #fff !important;
+    --color: #0d0221;
+    border-radius: 0.6rem;
+    height: 5.2rem;
+    padding: 0rem 1rem !important;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 3px 0 rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+
+    &.disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+  }
+
+  .select-box-icon {
+    font-size: 20px;
+  }
+
+}
+
+.options-model {
+  .modal-wrapper {
+    height: 500px !important;
+  }
+
+  .options-list {
+    overflow: auto !important;
+    font-size: 18px;
+    max-height: 300px;
+
+    ion-item {
+      font-size: 15px;
+
+      ion-label {
+        font-family: 'Poppins', sans-serif !important;
+        --font-family: 'Poppins', sans-serif !important;
+      }
+    }
+
+    .selected {
+      background-color: #e6e6e6;
+    }
+  }
+
+  .no-result-found-container {
+
+    ion-label {
+      font-size: 15px;
+      text-align: center;
+    }
+  }
+}
+
+// .searchbar-input {
+//   --keyboard-offset: 0px !important;
+// }

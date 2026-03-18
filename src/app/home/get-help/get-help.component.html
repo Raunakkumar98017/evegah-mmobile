@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border">
+  <app-child-header [title]="pageTitle"></app-child-header>
+</ion-header>
+<ion-content [fullscreen]="true" class="neumorphic-content">
+  <div class="container">
+    
+    <div class="image-wrapper">
+      <div class="circle-bg"></div>
+      <img src="../../../assets/images/contact.png" alt="Support" class="main-img" />
+    </div>
+
+    <div class="brand-info">
+      <h6 class="company-name">Evegah Mobility Pvt. Ltd.</h6>
+      <p class="address">Vadodara, Gujarat, India - 390023</p>
+    </div>
+
+    <div class="contact-grid">
+      
+      <div class="neu-card" (click)="openWhatsApp()">
+        <div class="icon-box whatsapp">
+          <ion-icon name="logo-whatsapp"></ion-icon>
+        </div>
+        <div class="text-content">
+          <span class="label">Chat with us</span>
+          <span class="value">+91 89809 66376</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+      </div>
+
+      <a href="mailto:Support@Evegah.com" class="neu-card">
+        <div class="icon-box email">
+          <ion-icon name="mail-outline"></ion-icon>
+        </div>
+        <div class="text-content">
+          <span class="label">Official Support</span>
+          <span class="value">Support@Evegah.com</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+      </a>
+
+    </div>
+
+    <p class="footer-note">Our team usually responds within 24 hours.</p>
+  </div>
+</ion-content>

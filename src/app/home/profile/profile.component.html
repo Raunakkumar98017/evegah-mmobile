@@ -1,0 +1,95 @@
+<ion-header class="childHeadermain ion-no-border">
+  <app-child-header [title]="pageTitle" [onBack]="backToHome"></app-child-header>
+</ion-header>
+
+<ion-content class="profile-page">
+  <div class="profile-shell">
+    
+    <section class="profile-hero">
+      <div class="avatar-container">
+        <div class="avatar-ring">
+          <figure class="userImg">
+            <img [src]="avatarPreviewUrl || '../../../assets/images/avatar1.png'" alt="user" />
+          </figure>
+          <button type="button" class="upload-fab" (click)="openPhotoPicker()">
+            <ion-icon name="camera"></ion-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="user-meta">
+        <h2>{{ userDetails?.userName || 'Guest User' }}</h2>
+        <div class="badge-row">
+          <span class="status-badge" [class.verified]="alreadyRegistered">
+            <ion-icon [name]="alreadyRegistered ? 'shield-checkmark' : 'alert-circle'"></ion-icon>
+            {{ alreadyRegistered ? 'KYC Verified' : 'Unverified' }}
+          </span>
+        </div>
+      </div>
+      
+      <input #photoInput class="photo-input" type="file" accept="image/*" (change)="onPhotoSelected($event)">
+    </section>
+
+    <div class="section-label">Personal Information</div>
+    <section class="info-grid">
+      <div class="info-box">
+        <ion-icon name="call-sharp"></ion-icon>
+        <span class="val">{{ mobileDisplay }}</span>
+        <span class="lbl">Mobile</span>
+      </div>
+      <div class="info-box">
+        <ion-icon name="calendar-sharp"></ion-icon>
+        <span class="val">{{ dateOfBirthDisplay }}</span>
+        <span class="lbl">Birthday</span>
+      </div>
+    </section>
+
+    <div class="info-box wide">
+      <ion-icon name="mail-sharp"></ion-icon>
+      <div class="content">
+        <span class="val">{{ userDetails?.emailId || 'Not Available' }}</span><br>
+        <span class="lbl">Email Address</span>
+      </div>
+    </div>
+
+    <div class="section-label">Settings & Wallet</div>
+    <section class="action-card-list">
+      <div class="action-item" (click)="editProfileHandler()">
+        <div class="icon-wrap purple"><ion-icon name="person-outline"></ion-icon></div>
+        <div class="text-wrap">
+          <span class="title">Account Details</span>
+          <span class="sub">Edit your profile information</span>
+        </div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+
+      <div class="action-item" (click)="navigate('home/paymentHistory')">
+        <div class="icon-wrap blue"><ion-icon name="card-outline"></ion-icon></div>
+        <div class="text-wrap">
+          <span class="title">Bank & Payments</span>
+          <span class="sub">Manage withdrawal methods</span>
+        </div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+
+      <div class="action-item" (click)="navigate('home/Wallet')">
+        <div class="icon-wrap gold"><ion-icon name="wallet-outline"></ion-icon></div>
+        <div class="text-wrap">
+          <span class="title">Wallet Balance</span>
+          <span class="sub">View transactions and rewards</span>
+        </div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+    </section>
+
+    <div class="danger-zone">
+     
+      
+      <button class="ghost-btn" (click)="showConfirmationAlert()">
+        <ion-icon name="power-outline"></ion-icon>
+        Sign Out
+      </button>
+    </div>
+
+  </div>
+</ion-content>

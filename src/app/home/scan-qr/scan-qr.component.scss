@@ -1,0 +1,180 @@
+// Variables to match the screenshot theme
+$primary-color: #2a195c; // Deep purple from your original code
+$bg-light: #f8f9ff;
+$card-bg: #ffffff;
+$text-muted: #707070;
+
+ion-content {
+  --background: #{$bg-light};
+  font-family: 'Poppins', sans-serif;
+
+  .main-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 90%;
+  }
+}
+
+ion-content.scanner-mode {
+  --background: transparent !important;
+  background: transparent !important;
+}
+
+ion-content.scanner-mode {
+  .instruction-card {
+    background: transparent !important;
+    backdrop-filter: none;
+    position: relative;
+    z-index: 2;
+    box-shadow: none;
+  }
+
+  .scan-wrapper {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .scan-box {
+    background: transparent !important;
+    border: 1px solid rgba(42, 25, 92, 0.2);
+    box-shadow: 0 0 0 100vmax #fff;
+    z-index: 2;
+  }
+
+  .title,
+  .subtitle,
+  .footer-actions,
+  .manual-entry-section {
+    position: relative;
+    z-index: 3;
+  }
+}
+
+.instruction-card {
+  background: $card-bg;
+  border-radius: 24px;
+  padding: 30px 20px;
+  box-shadow: 0 8px 24px rgba(149, 157, 165, 0.1);
+  text-align: center;
+
+  .title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: $text-muted;
+    margin-bottom: 30px;
+    padding: 0 20px;
+  }
+}
+
+.scan-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+
+  .scan-box {
+    width: 220px;
+    height: 220px;
+    background: #fcfcfc;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+
+    // Corner Accents
+    .corner {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 3px solid $primary-color;
+    }
+    .top-left { top: 0; left: 0; border-right: 0; border-bottom: 0; border-top-left-radius: 15px; }
+    .top-right { top: 0; right: 0; border-left: 0; border-bottom: 0; border-top-right-radius: 15px; }
+    .bottom-left { bottom: 0; left: 0; border-right: 0; border-top: 0; border-bottom-left-radius: 15px; }
+    .bottom-right { bottom: 0; right: 0; border-left: 0; border-top: 0; border-bottom-right-radius: 15px; }
+
+    .scan-line {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: $primary-color;
+      box-shadow: 0 0 8px $primary-color;
+      animation: scan 2s infinite ease-in-out;
+    }
+  }
+}
+
+.custom-input {
+  --background: #f4f5f9;
+  --border-radius: 12px;
+  --padding-start: 15px;
+  margin-bottom: 15px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  
+  ion-input {
+   font-size: 18px; 
+    font-weight: 600; 
+    color: #333;
+    text-align: center;
+    min-height: 56px; 
+    
+    --placeholder-color: #999;
+    --placeholder-font-weight: 400;
+  }
+}
+
+.primary-btn {
+  --background: #{$primary-color};
+  --border-radius: 14px;
+  --box-shadow: 0 4px 12px rgba(42, 25, 92, 0.3);
+  height: 54px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.footer-actions {
+  margin-top: 20px;
+  
+  .keyboardBtn {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &.active {
+      background: $primary-color;
+      ion-icon { color: #fff; }
+    }
+
+    ion-icon {
+      font-size: 24px;
+      color: $primary-color;
+    }
+  }
+
+  .help-text {
+    font-size: 12px;
+    color: #999;
+    margin-top: 12px;
+  }
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  50% { top: 100%; }
+  100% { top: 0; }
+}

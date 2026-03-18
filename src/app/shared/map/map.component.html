@@ -1,0 +1,32 @@
+<div class="map-container">
+  <div class="map-shell">
+    <div class="map-controls-container" [ngClass]="{'hide': showSearchbox === false}">
+
+      <div class="searchbox-container">
+        <input type="text" placeholder="Search Location" class="searchBox" (keydown.enter)="$event.preventDefault()"
+          #searchboxReference />
+        <ion-icon name="search-outline" (click)="searchLocationByText(searchboxReference.value)"></ion-icon>
+      </div>
+
+      <ion-button expand="block" class="current-location-button"
+        (click)="handleFindZonesByCurrentLocationControlClick()">
+        <ion-icon slot="start" name="locate-outline"></ion-icon>
+        Find zones near by me
+      </ion-button>
+
+    </div>
+
+    <div
+      class="map-element"
+      [ngClass]="{'short-map': callingFromHome === false}"
+      [style.background-image]="lastMapPreviewUrl ? 'url(' + lastMapPreviewUrl + ')' : 'none'"
+      #mapReference>
+    </div>
+
+    <div *ngIf="loading" class="map-loading-overlay">
+      <label>We're initializing your map. Hang on just a moment...</label>
+    </div>
+
+  </div>
+
+</div>

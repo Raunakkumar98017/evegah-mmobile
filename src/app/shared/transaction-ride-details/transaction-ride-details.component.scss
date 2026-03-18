@@ -1,0 +1,52 @@
+ ion-header {
+   display: flex;
+   padding: 15px;
+   border-bottom: 1px solid rgba(0, 216, 0, 0.3215686275);
+
+   ion-title {
+     font-size: 1.8rem;
+     font-family: 'Poppins', sans-serif !important;
+     --font-family: 'Poppins', sans-serif !important;
+   }
+
+   ion-icon {
+     font-size: 30px;
+     color: red;
+   }
+ }
+
+ ion-content {
+   font-family: 'Poppins', sans-serif !important;
+   --font-family: 'Poppins', sans-serif !important;
+
+   .brandLogo {
+     width: 150px;
+     margin: 15px auto 20px;
+     text-align: center;
+     display: block;
+   }
+
+   ion-label {
+     font-size: 16px;
+     font-family: 'Poppins', sans-serif !important;
+     --font-family: 'Poppins', sans-serif !important;
+     color: #777;
+   }
+
+   .value {
+     font-weight: 600;
+     color: #2e313d;
+   }
+
+   .seeMoreLessControl {
+     --background: transparent;
+     color: #848482;
+     margin: 0 0 10px 0;
+     font-weight: 600;
+     font-size: 15px !important;
+   }
+
+   .horizontalDivision {
+     border-bottom: 1px solid rgba(0, 216, 0, 0.32156862);
+   }
+ }

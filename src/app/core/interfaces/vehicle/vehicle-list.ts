@@ -1,0 +1,33 @@
+export interface IVehicleList {
+    vehicleId: number;
+    vehicleType: string;
+    vehicleTypeName: string;
+    modelName: string;
+    brakesType: string;
+    brandName: string;
+    frameType: string;
+    tiersSize: string;
+    minHireTime: string;
+    length: string;
+    width: string;
+    widthUnit: string;
+    weight: string;
+    weightUnit: string;
+    height: string;
+    heightUnit: string;
+    statusEnumId: string;
+    statusName: string;
+    minimumRentRate: string;
+    remarks: string;
+    actionRemarks: string;
+    createdOnDate: string;
+    createdByLoginUserId: string;
+    createdByUserName: string;
+    createdByUserTypeEnumId: string;
+    createdByUserTypeName: string;
+    updatedLoginUserId: string;
+    updatedLoginUserName: string;
+    updatedOnDate: string;
+    updatedByUserTypeEnumId: string;
+    updatedByUserTypeName: string;
+}

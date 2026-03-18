@@ -1,0 +1,35 @@
+<div class="searchable-select-main">
+
+  <!-- select box button element starts here -->
+  <div [attr.class]="disabled === true ? 'select-box disabled' : 'select-box'" (click)="handleSelectBoxControlClick()">
+    <ion-label>{{selectBoxLabel}}</ion-label>
+    <ion-icon class="select-box-icon"
+      [attr.name]="displayOptions === false ? 'chevron-down-outline' : 'chevron-up-outline'"></ion-icon>
+  </div>
+  <!-- select box button element ends here -->
+
+  <!-- options model starts here -->
+  <ion-modal #modal [isOpen]="displayOptions" (willDismiss)="closeModel()" [initialBreakpoint]="0.5"
+    [breakpoints]="[0, 0.5, 0.75]" class="options-model">
+
+    <ion-content> 
+      <ion-searchbar placeholder="Search by name" (click)="modal.setCurrentBreakpoint(0.75)" show-clear-button="focus"
+        (ionInput)="handleSearchInput($event)" value="{{searchQuery}}" class="search-box"></ion-searchbar>
+
+      <ion-list class="options-list" *ngIf="optionsList.length !== 0">
+        <ion-item *ngFor="let item of optionsList" [class.selected]="item.selected === true"
+          (click)="handleItemClick(item)">
+          <ion-label>{{item.label}}</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <div class="no-result-found-container">
+        <ion-label *ngIf="optionsList.length === 0">No result found...</ion-label>
+      </div>
+
+    </ion-content>
+
+  </ion-modal>
+  <!-- options model ends here -->
+
+</div>

@@ -1,0 +1,130 @@
+<ion-header class="ion-no-border">
+  <div class="glass-header">
+    <button class="back-circle-btn" (click)="handleBackNavigation()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </button>
+    <ion-title>Vehicle Details</ion-title>
+    <div class="header-right">
+      <div class="live-tag">
+        <span class="dot"></span> Live
+      </div>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content class="device-details-page no-scroll" [fullscreen]="true">
+  
+  <swiper-container [autoplay]="true" class="vehicle-swiper">
+     
+    <swiper-slide *ngFor="let image of vehicleModelImage | slice:0:3">
+        
+      <ion-img
+        width="80"
+        height="80"
+        class="cycle-img"
+        [src]="image.image_unique_signed_url"
+      ></ion-img>
+       
+    </swiper-slide>
+     
+    <swiper-slide *ngIf="defaultImage">
+        
+      <ion-img
+        width="80"
+        height="80"
+        class="cycle-img"
+        src="../../../assets/images/evegah-bike.jpg"
+      ></ion-img>
+       
+    </swiper-slide>
+    
+  </swiper-container>
+
+  <div class="details-wrapper">
+    <div class="timer-banner">
+      <ion-icon name="time-outline"></ion-icon>
+      <div class="timer-text">
+        <span>BOOKING WINDOW CLOSES IN:</span>
+        <strong class="timeCount">{{timeSpentBeforeBookingRideValue}}</strong>
+      </div>
+    </div>
+
+    <div class="stats-container">
+      <div class="id-card-3d">
+        <div class="id-icon"><ion-icon name="finger-print-outline"></ion-icon></div>
+        <div class="id-content">
+          <label>VEHICLE IDENTITY</label>
+          <h3>{{ vehicleIdentifier }}</h3>
+        </div>
+      </div>
+
+      <div class="grid-layout">
+        <div class="stat-box">
+          <div class="icon-box model"><ion-icon name="bicycle-outline"></ion-icon></div>
+          <div class="text-box">
+            <label>MODEL</label>
+            <span>{{modelName || 'Standard'}}</span>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="icon-box battery"><ion-icon name="battery-charging-outline"></ion-icon></div>
+          <div class="text-box">
+            <label>ENERGY</label>
+            <span>{{battery}}%</span>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="icon-box range"><ion-icon name="map-outline"></ion-icon></div>
+          <div class="text-box">
+            <label>MAX RANGE</label>
+            <span>{{maxRange}} km</span>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="icon-box rate"><ion-icon name="flash-outline"></ion-icon></div>
+          <div class="text-box">
+            <label>FARE/MIN</label>
+            <span>₹{{minimumRentRate}}</span>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="icon-box hire"><ion-icon name="hourglass-outline"></ion-icon></div>
+          <div class="text-box">
+            <label>MIN HIRE</label>
+            <span>{{minHireTime}} Min</span>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="icon-box wallet"><ion-icon name="wallet-outline"></ion-icon></div>
+          <div class="text-box">
+            <label>WALLET</label>
+            <span>₹{{walletBalance}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-zoom-overlay" *ngIf="zoomedImageUrl" (click)="closeImageZoom()">
+    <button type="button" class="zoom-close-btn" (click)="closeImageZoom(); $event.stopPropagation()">
+      <ion-icon name="close-outline"></ion-icon>
+    </button>
+    <img class="zoomed-preview-img" [src]="zoomedImageUrl" alt="Vehicle Preview" (click)="$event.stopPropagation()">
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="footer-action-bar">
+    <button class="btn-outline" (click)="handleBackNavigation()">
+      Back
+    </button>
+    <button class="btn-primary" (click)="startRide()">
+      Start Ride <ion-icon name="chevron-forward-outline"></ion-icon>
+    </button>
+  </div>
+</ion-footer>

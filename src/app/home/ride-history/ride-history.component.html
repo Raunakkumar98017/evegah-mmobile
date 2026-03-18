@@ -1,0 +1,46 @@
+<!-- Header Start -->
+<ion-header class="childHeadermain">
+  <app-child-header [title]="pageTitle"></app-child-header>
+</ion-header>
+<!-- Header End -->
+<!-- Main Content Start -->
+<ion-content>
+
+  <ion-list class="animate__animated animate__slideInUp animate__fast" *ngIf="rideHistory?.length !== 0">
+    <section *ngFor="let  history  of  rideHistory" class="rideHistory">
+      <ion-item class="color-list" lines="none">
+
+        <section class="center-section" slot="start">
+          <ion-label class="titlehead">Model: {{history.modelName}}</ion-label>
+          <!-- <ion-label class="label-number">Ride Number: {{history.rideBookingNo}}</ion-label> -->
+          <ion-label class="label-number">{{history.fromRideTime | date:'medium'}}</ion-label>
+          <!-- <ion-label class="label-number" *ngIf="history.actualRideTime !== null">to: {{history.actualRideTime |
+            date:'medium'}}</ion-label>
+          <ion-label class="label-number">Minimum hire time: {{history.minimumHiringTime}}</ion-label>
+          <ion-label class="label-number">Rate per min.: {{history.minimumRentRate}}</ion-label> -->
+          <!-- <ion-label class="label-number" *ngIf="history.actualRideTime !== null">Total Duration
+            {{history.actualRideMin}} min(s)</ion-label> -->
+          <ion-label class="ride-not-ended-label" *ngIf="history.actualRideTime === null">Ride Not Ended
+            Yet</ion-label>
+        </section>
+
+        <section slot="end" class="ion-text-right center-section">
+          <ion-label class="rupess-cost" slot="end" *ngIf="history.actualRideTime !== null"> INR
+            {{history.totalRideAmount}}</ion-label>
+          <ion-label class="rupess-cost" slot="end" *ngIf="history.actualRideTime === null">Not Calculated</ion-label>
+          <button (click)="handleViewDetails(history)" *ngIf="history.actualRideTime !== null">View Details</button>
+        </section>
+
+      </ion-item>
+
+    </section>
+  </ion-list>
+
+  <div *ngIf="rideHistory?.length === 0" class="no-data-section">
+    <div class="nodata">
+      <img src="../../../assets/images/nodata.png" alt="No data image">
+    </div>
+  </div>
+
+</ion-content>
+<!-- Main Content End -->

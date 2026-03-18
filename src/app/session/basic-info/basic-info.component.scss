@@ -1,0 +1,137 @@
+// @author: Lokesh Rajput
+// @date: 27 Sep-2021
+// @decs.: basic info page style
+ion-header {
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
+  // padding: 10px;
+  // position: absolute;
+
+  ion-back-button {
+    --background: #fff;
+    border-radius: 50%;
+    --border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    color: #2a195c;
+    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
+    margin-left: 5px;
+    --icon-font-size: 24px;
+  }
+
+  .skipbtn {
+    background-color: transparent;
+    color: #02d802;
+    font-size: 17px;
+    letter-spacing: 2px;
+  }
+}
+
+ion-content {
+  --padding-top: 2.5rem;
+  overflow: hidden;
+  height: 100vh;
+  text-align: left;
+  margin: 10px;
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+
+  form {
+    padding: 10px 15px 15px;
+  }
+
+  .lable {
+    font-size: 1.5rem;
+    color: #333;
+    padding-bottom: 1rem;
+    display: block;
+
+    .hightLightText {
+      color: #333;
+      margin-left: 3px;
+    }
+  }
+
+  .space {
+    margin-bottom: 1rem;
+  }
+
+  ion-input {
+    font-size: 1.5rem;
+    --background: #fff !important;
+    --color: #333;
+    border-radius: 0.6rem;
+    height: 4.5rem;
+    padding: 0rem 1rem !important;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 3px 0 rgb(0 0 0 / 10%);
+  }
+
+  ion-select {
+    background-color: #fff;
+    color: #333;
+    font-size: 1.5rem;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 3px 0 rgb(0 0 0 / 10%);
+    padding: 0rem 0.6rem !important;
+    height: 4.5rem;
+    padding: 0rem 1rem !important;
+    border-radius: 0.6rem;
+  }
+
+  h4 {
+    line-height: 0.9;
+    margin-bottom: 2rem;
+    letter-spacing: 0.1rem;
+  }
+
+  p {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 1rem 0rem 2rem;
+    letter-spacing: 0.1rem;
+    font-weight: 600;
+
+    .hightLightText {
+      color: #333;
+    }
+  }
+}
+
+.termsCheckbox {
+  margin-right: 10px;
+}
+
+ion-footer {
+  --color: #fff;
+  text-align: center;
+  padding: 0.6rem 2rem;
+  --background-color: #fff;
+
+  ion-button {
+    --background: #2a195c;
+    font-weight: 600;
+    width: 50%;
+    margin: 0 auto;
+    --border-radius: 38px;
+    font-size: 17px;
+    color: #fff;
+    height: 50px;
+  }
+}
+
+/* Set the icon color and opacity */
+ion-select::part(icon) {
+  opacity: 1;
+  width: 14px;
+  position: absolute;
+  right: 5px;
+}
+
+.leftarrow {
+  margin-right: 1rem;
+}
+
+.rightarrow {
+  margin-left: 1rem;
+}

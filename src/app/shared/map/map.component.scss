@@ -1,0 +1,151 @@
+.map-container {
+	position: relative;
+	font-family: 'Poppins', sans-serif !important;
+	--font-family: 'Poppins', sans-serif !important;
+
+	.map-shell {
+		position: relative;
+	}
+
+	.map-element {
+		position: static !important;
+		height: 100vh;
+		background-color: #eef2f7;
+		background-image:
+			linear-gradient(0deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)),
+			repeating-linear-gradient(45deg, #d7dde7 0, #d7dde7 1px, transparent 1px, transparent 20px),
+			repeating-linear-gradient(-45deg, #dfe4ec 0, #dfe4ec 1px, transparent 1px, transparent 24px);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+
+		&.short-map {
+			height: 55vh;
+		}
+	}
+
+	.map-loading-overlay {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0 28px;
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.78));
+		backdrop-filter: blur(2px);
+		z-index: 15;
+
+		label {
+			text-align: center;
+			font-size: 1.5rem;
+			line-height: 2.2rem;
+			color: #4b5563;
+			font-weight: 600;
+		}
+	}
+
+	.map-warning-chip {
+		position: absolute;
+		left: 16px;
+		right: 16px;
+		bottom: 86px;
+		padding: 10px 14px;
+		font-size: 1.2rem;
+		font-weight: 600;
+		line-height: 1.7rem;
+		border-radius: 12px;
+		background: rgba(42, 25, 92, 0.92);
+		color: #fff;
+		z-index: 16;
+		text-align: center;
+	}
+
+	.map-controls-container {
+		position: absolute;
+		top: 80px;
+		z-index: 10;
+		width: 100%;
+		padding: 0 20px;
+		display: flex;
+		flex-direction: column;
+		row-gap: 20px;
+
+		&.hide {
+			display: none;
+		}
+
+		.searchbox-container {
+			min-height: 45px;
+			background: #fff;
+			display: flex;
+			align-items: center;
+			box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
+
+			.searchBox {
+				padding: 0 10px;
+				border: none;
+				outline: none;
+				font-size: 15px;
+				min-height: 45px;
+				width: calc(100% - 55px);
+			}
+
+			ion-icon {
+				font-size: 25px;
+				padding: 0 15px;
+			}
+
+		}
+
+	}
+
+	.location-permission-section {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 0px 20px;
+		row-gap: 20px;
+
+		.permission-steps-section {
+			display: flex;
+			flex-direction: column;
+			row-gap: 10px;
+		}
+
+		label {
+			font-size: 1.8rem;
+			letter-spacing: 0.2px;
+			line-height: 2.3rem;
+			color: #777;
+		}
+
+		.permission-button-controls {
+			display: flex;
+			flex-direction: column;
+			row-gap: 10px;
+		}
+	}
+
+	.request-permission-button,
+	.current-location-button {
+		--background: #2a195c !important;
+		font-weight: 600;
+		justify-content: center;
+		align-items: center;
+		border-radius: 38px;
+		display: flex;
+		font-size: 15px;
+		--color: #fff;
+		box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
+
+		ion-icon {
+			margin-right: 10px;
+		}
+	}
+
+}

@@ -1,0 +1,80 @@
+<!--
+  @author: Lokesh Rajput
+  @date: 28 Sep-2021
+  @decs.: basic info page design
+ -->
+<!-- basic info page Content Start  -->
+<ion-header class="childHeadermain">
+  <app-child-header [title]="'Edit Profile'" [onBack]="backNavigation" *ngIf="editProfile === true"></app-child-header>
+</ion-header>
+<ion-content [fullscreen]="true" ion-padding>
+  <form [formGroup]="registrationForm" (ngSubmit)="proceedHandler()">
+    <ion-row>
+      <ion-col size="12">
+        <p>*Required Information</p>
+      </ion-col>
+      <ion-col size="12" class="space">
+        <ion-label class="lable">
+          Your Name
+          <span class="hightLightText">*</span>
+        </ion-label>
+        <ion-input type="text" placeholder="Enter Full Name" formControlName="userName"></ion-input>
+      </ion-col>
+      <ion-col size="12" class="space">
+        <ion-label class="lable">
+          Date of Birth
+          <span class="hightLightText">*</span>
+        </ion-label>
+        <ion-input type="date" formControlName="dateOfBirth" [max]="currentDate"></ion-input>
+      </ion-col>
+      <ion-col size="12" class="space">
+        <ion-label class="lable">
+          Email
+        </ion-label>
+        <ion-input type="text" placeholder="Enter Email" formControlName="emailId"></ion-input>
+      </ion-col>
+      <ion-col size="12" class="space">
+        <ion-label class="lable">
+          Address
+        </ion-label>
+        <ion-input type="text" placeholder="Enter Address" formControlName="address"></ion-input>
+      </ion-col>
+      <ion-col size="12" class="space">
+        <ion-label class="lable">
+          State
+        </ion-label>
+        <app-searchable-select [placeholder]="'Select State'" [data]="stateData" [selectedValue]="selectedState"
+          (onSelect)="stateChange($event)"></app-searchable-select>
+      </ion-col>
+      <ion-col size="12" class="space">
+        <ion-label class="lable">
+          City
+        </ion-label>
+        <app-searchable-select [placeholder]="'Select City'" [data]="cityData" [selectedValue]="selectedCity"
+          (onSelect)="cityChange($event)" [disabled]="cityData.length === 0"></app-searchable-select>
+      </ion-col>
+      <ion-col size="12" *ngIf="editProfile === false">
+        <ion-label class="lable">
+          Referral Code
+        </ion-label>
+        <ion-input type="text" placeholder="Enter Referral Code" formControlName="referralCode"></ion-input>
+      </ion-col>
+
+      <ion-col size="12" *ngIf="editProfile === false">
+        <ion-item class="ion-no-padding">
+          <ion-checkbox formControlName="termsConditions" class="termsCheckbox"></ion-checkbox>
+          <ion-label>I agreed to <span (click)="navigateToTermsCondition()">terms and conditions.</span></ion-label>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+  </form>
+</ion-content>
+<ion-footer no-border>
+  <form [formGroup]="registrationForm" (ngSubmit)="proceedHandler()">
+    <ion-button type="submit" [disabled]="!registrationForm.valid">
+      {{editProfile === true ? "Save" : "Continue"}}
+    </ion-button>
+  </form>
+</ion-footer>
+<!-- Otp Content End -->

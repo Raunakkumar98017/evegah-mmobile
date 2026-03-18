@@ -1,0 +1,85 @@
+<!--
+  @author: Lokesh Rajput
+  @date: 30 March-2022
+  @decs.: Otp page design
+ -->
+<!-- Otp Content Start  -->
+<ion-view>
+  <ion-header class="topHeader">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="home" text="" icon="arrow-back-outline" (click)="backBtn()">
+        </ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <span *ngIf="showOtp" class="otp">OTP - {{otp}}</span>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <main class="otpPage">
+      <section>
+        <figure class="app-logo">
+          <img src="../../../assets/images/EV-final-logo.png" alt="brand image" />
+        </figure>
+        <!-- <h1 class="evegahText">Evegah</h1> -->
+        <article class="innerContent">
+          
+          <p>
+            We have sent a verification code to
+            <span class="hightLightText">+91 {{ mobileNumber }}</span>
+          </p>
+        </article>
+
+        <div class="otp-box innerContent">
+          <ng-otp-input #ngOTPInput (onInputChange)="onOtpChange($event)" (keyup)="handleEnterKeyEvent($event)"
+            [config]="{length: 4, allowNumbersOnly: true, inputClass: 'otpInput', containerClass: 'otpContainer'}"></ng-otp-input>
+        </div>
+        <!-- <ion-row class="otp-box innerContent">
+          <ion-col>
+            <ion-input name="a" #a type="number" maxlength="1" [(ngModel)]="enteredOtp.first"
+              (keyup)="moveFocus($event, b, '')"
+              (keydown)="enteredOtp.first && $event.keyCode!==8 ? false : true"></ion-input>
+          </ion-col>
+
+          <ion-col>
+            <ion-input name="b" #b type="number" maxlength="1" [(ngModel)]="enteredOtp.second"
+              (keyup)="moveFocus($event, c, a)"
+              (keydown)="enteredOtp.second && $event.keyCode!==8 ? false : true"></ion-input>
+          </ion-col>
+
+          <ion-col>
+            <ion-input name="c" #c type="number" maxlength="1" [(ngModel)]="enteredOtp.third"
+              (keyup)="moveFocus($event, d, b)"
+              (keydown)="enteredOtp.third && $event.keyCode!==8 ? false : true"></ion-input>
+          </ion-col>
+
+          <ion-col>
+            <ion-input name="d" #d type="number" maxlength="1" [(ngModel)]="enteredOtp.fourth"
+              (keyup)="moveFocus($event, '', c)"
+              (keydown)="enteredOtp.fourth && $event.keyCode!==8 ? false : true"></ion-input>
+          </ion-col>
+
+        </ion-row> -->
+
+        <ion-row class="innerContent">
+          <ion-col size="12" ng-controller="countdownController">
+            <p *ngIf="errorMsg" class="errorMsg">{{ errorMsg }}</p>
+            <p class="verfytime">{{ counter }}</p>
+            <!-- if otp has not already been resent and counter is timed out -> then only show below content -->
+            <p *ngIf="alreadyResendOTP === false && counter === '00:00'" class="message">
+              Didn’t receive the OTP?
+              <a (click)="resendOtp()">Resend OTP</a>
+            </p>
+            <!-- if all three attempt remains, don't show the below content -->
+            <p *ngIf="enterOTPAttemptRemains !== 3" class="message">
+              {{enterOTPAttemptRemains}} attempt(s) remains of 3
+            </p>
+          </ion-col>
+
+          <ion-button (click)="proceed()" [disabled]="disableContinueControl">Continue</ion-button>
+
+        </ion-row>
+      </section>
+    </main>
+  </ion-content>
+</ion-view>
+<!-- Otp Content End -->

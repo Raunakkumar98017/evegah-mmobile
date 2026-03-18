@@ -1,0 +1,32 @@
+ion-header {
+    background-color: transparent !important;
+    text-align: center;
+    padding: 45px 0px 10px;
+}
+.itemDetails { 
+    ion-label {
+        font-size: 17px;
+    }
+}
+ion-footer {
+    padding: 10px;
+    text-align: center; 
+
+    ion-button {
+        min-width: 130px;
+        margin: 0px 5px;
+        height: 40px;
+        --border-radius: 8px; 
+        text-transform: capitalize;
+       
+    }
+    .success {
+        --background: #48C938;
+    }
+    .danger {
+        --background: #ee675c;
+    }
+}
+.modal-wrapper {
+    height: 400px !important;
+}

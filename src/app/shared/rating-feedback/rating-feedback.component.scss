@@ -1,0 +1,152 @@
+@mixin button-control {
+  font-weight: 600;
+  bottom: 16px;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  border-radius: 38px;
+  display: flex;
+  font-size: 17px;
+  color: #fff;
+  height: 50px;
+}
+
+@mixin grid-layout {
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+}
+
+@mixin feedback-reply-label {
+  font-size: 17px;
+  letter-spacing: 0.2px;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px 0 rgb(0, 0, 0, 0.25);
+
+  span {
+    font-weight: 600;
+  }
+}
+
+.rating-feedback-container {
+  padding: 20px;
+  @include grid-layout;
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+
+  .title {
+    font-size: 18px;
+    text-align: center;
+    margin: 0;
+  }
+
+  .rating-feedback-section {
+    @include grid-layout;
+  }
+
+  .rating-container {
+    display: flex;
+    justify-content: center;
+    font-size: 37px;
+    column-gap: 12px;
+    color: #848482;
+
+    span {
+      opacity: 0.5;
+    }
+
+    .active {
+      opacity: 1;
+      font-size: 42px;
+    }
+
+    .filled {
+      color: #fdcc0d;
+    }
+  }
+
+  .rating-label-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+
+    .rating-label {
+      font-size: 2rem;
+      color: #333;
+      text-align: center;
+      display: block;
+      font-weight: 600;
+    }
+  }
+
+  .label {
+    font-size: 1.5rem;
+    color: #333;
+    padding-bottom: 1rem;
+    display: block;
+  }
+
+  ion-textarea {
+    font-size: 1.5rem;
+    --highlight-color-focused: #848482;
+    border: 1px solid #848482;
+    --background: #fff !important;
+    --color: #848482;
+    border-radius: 5px;
+    overflow: hidden;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    font-family: 'Poppins', sans-serif !important;
+    --font-family: 'Poppins', sans-serif !important;
+  }
+
+  .skip-button {
+    background-color: #aaa;
+    @include button-control;
+  }
+
+  .submit-button {
+    background-color: #2a195c;
+    @include button-control;
+  }
+
+  .feedback-submitted-section {
+    display: flex;
+    align-items: center;
+    row-gap: 10px;
+    justify-content: center;
+    flex-direction: column;
+
+    .checkIcon {
+      color: #2a195c;
+      font-size: 135px;
+      text-align: center;
+    }
+
+    .feedbackLabel {
+      font-size: 1.95rem;
+      color: #333;
+      padding-bottom: 1rem;
+      display: block;
+      text-align: center;
+    }
+  }
+
+  .feedbackText {
+    color: #2e313d;
+    max-width: 80%;
+    margin: 0 0 0 auto;
+    @include feedback-reply-label;
+  }
+
+  .replyText {
+    color: #333;
+    max-width: 80%;
+    margin: 0 auto 0 0;
+    @include feedback-reply-label;
+  }
+
+}

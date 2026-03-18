@@ -1,0 +1,26 @@
+<!-- Header Start -->
+<ion-header class="childHeadermain">
+  <app-child-header [title]="pageTitle"></app-child-header>
+</ion-header>
+<!-- Header End -->
+
+<ion-content>
+
+  <img src="../../../assets/images/referrals.jpg" alt="user" />
+  <h3>Claim Your Benefit</h3>
+  <ion-label position="stacked">{{referralCode}}</ion-label>
+
+  <ion-row>
+    <ion-col>
+      <button class="scan-button" (click)="copyToClipboard()">
+        Copy Code
+      </button>
+    </ion-col>
+    <ion-col>
+      <button class="scan-button" (click)="shareReferralCode()">
+        Share Code
+      </button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

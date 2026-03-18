@@ -1,0 +1,40 @@
+<!-- Header Start -->
+<ion-header class="childHeadermain">
+  <app-child-header [title]="pageTitle"></app-child-header>
+</ion-header>
+<!-- Header End -->
+<!-- Main Content Start -->
+<ion-content>
+
+  <ion-list class="animate__animated animate__slideInUp animate__fast" *ngIf="userTransactionDetailList?.length !== 0">
+    <ion-item class="color-list" lines="none" *ngFor="let  TransactionDetailList  of  userTransactionDetailList">
+      <section class="center-section">
+        <ion-label class="titlehead">{{TransactionDetailList.method}}</ion-label>
+        <ion-label class="label-number">{{TransactionDetailList.createdon_date | date:'medium'}}</ion-label>
+        <ion-label class="withdrawn-status-label"
+          *ngIf="+TransactionDetailList.transaction_type_enum_id === +_enumCodeConstants?.paymentTransactionWithdrawalRequest">{{TransactionDetailList.withdraw_request_status}}</ion-label>
+      </section>
+      <section slot="end">
+        <ion-label class="rupess-cost">
+          <span class="transaction-add-icon"
+            *ngIf="+TransactionDetailList.transaction_type_enum_id === +_enumCodeConstants?.paymentTransactionAddWallet">&#43;</span>
+          <span class="transaction-remove-icon"
+            *ngIf="+TransactionDetailList.transaction_type_enum_id !== +_enumCodeConstants?.paymentTransactionAddWallet">&#45;</span>
+          INR {{TransactionDetailList.amount +TransactionDetailList.extra_charges +
+          TransactionDetailList.hiring_charges}}
+        </ion-label>
+        <button
+          *ngIf="+TransactionDetailList.transaction_type_enum_id === +_enumCodeConstants?.paymentTransactionRideCharge"
+          (click)="handleViewDetails(TransactionDetailList)">View
+          Details</button>
+      </section>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="userTransactionDetailList?.length === 0" class="no-data-section">
+    <div class="nodata">
+      <img src="../../../assets/images/nodata.png" alt="No data image">
+    </div>
+  </div>
+
+</ion-content>

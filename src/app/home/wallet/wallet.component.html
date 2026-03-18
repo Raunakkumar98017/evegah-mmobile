@@ -1,0 +1,99 @@
+<ion-header class="ion-no-border">
+  <div class="clean-header">
+    <button type="button" class="back-btn" [routerLink]="['/home']">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </button>
+    <ion-title>{{ pageTitle }}</ion-title>
+    <div class="user-avatar-sync" (click)="navigate('home/profile')">
+      <img [src]="avatarPreviewUrl || '../../../assets/images/avatar1.png'" alt="profile" />
+    </div>
+  </div>
+</ion-header>
+
+<ion-content class="clean-wallet" [fullscreen]="true">
+  
+  <div class="wallet-wrapper">
+    <section class="premium-balance-card">
+      <div class="card-content">
+        <div class="top-meta">
+          <span class="label">Total Amount</span>
+          <div class="live-status">
+            <span class="pulse-dot"></span> Live
+          </div>
+        </div>
+        <h2 class="main-balance">₹{{ walletAmount || 0 | number:'1.2-2' }}</h2>
+        <div class="pending-badge">
+          <ion-icon name="timer-outline"></ion-icon>
+          <span>₹{{ extraCharges }} Pending Credits</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="action-grid">
+      <div class="action-item" (click)="openAmountPrompt('deposit')">
+        <div class="glass-icon deposit">
+          <ion-icon name="add-circle"></ion-icon>
+        </div>
+        <label>Deposit</label>
+      </div>
+
+      <div class="action-item" (click)="openAmountPrompt('withdraw')">
+        <div class="glass-icon withdraw">
+          <ion-icon name="arrow-up-circle"></ion-icon>
+        </div>
+        <label>Withdraw</label>
+      </div>
+
+      <div class="action-item" (click)="navigate('home/paymentHistory')">
+        <div class="glass-icon history">
+          <ion-icon name="receipt"></ion-icon>
+        </div>
+        <label>History</label>
+      </div>
+
+      <div class="action-item">
+        <div class="glass-icon secure">
+          <ion-icon name="shield-checkmark"></ion-icon>
+        </div>
+        <label>Secure</label>
+      </div>
+    </section>
+
+    <div class="section-title">
+      <h3>Recent Activity</h3>
+      <a (click)="viewAllTransactions()">See All</a>
+    </div>
+
+    <div class="activity-list" *ngIf="displayTransactions.length > 0">
+      <div class="modern-tx-card" *ngFor="let tx of displayTransactions">
+        <div class="tx-icon-box" [ngClass]="isCredit(tx) ? 'type-credit' : 'type-debit'">
+          <ion-icon [name]="getTransactionIcon(tx)"></ion-icon>
+        </div>
+        
+        <div class="tx-details">
+          <span class="tx-name">{{ getTransactionTitle(tx) }}</span>
+          <span class="tx-time">{{ tx.createdon_date | date:'MMM dd • hh:mm a' }}</span>
+        </div>
+
+        <div class="tx-amount-group">
+          <span class="tx-val" [class.plus]="isCredit(tx)">
+            {{ getTransactionSign(tx) }}₹{{ getTransactionAmount(tx) | number:'1.2-2' }}
+          </span>
+          <span class="tx-status-pill" [ngClass]="getStatusClass(tx)">{{ getStatusText(tx) }}</span>
+        </div>
+      </div>
+
+      <button class="btn-load-more" 
+              *ngIf="userTransactionDetailList.length > displayTransactions.length"
+              (click)="loadMoreTransactions()">
+        <span>Load More</span>
+        <ion-icon name="chevron-down"></ion-icon>
+      </button>
+    </div>
+
+    <div class="empty-view" *ngIf="displayTransactions.length === 0">
+      <ion-icon name="file-tray-outline"></ion-icon>
+      <p>No activity yet</p>
+    </div>
+  </div>
+</ion-content>

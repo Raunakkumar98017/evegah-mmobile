@@ -1,0 +1,31 @@
+ion-content {
+  text-align: center;
+  font-family: 'Poppins', sans-serif !important;
+  --font-family: 'Poppins', sans-serif !important;
+
+  img {
+    margin-top: 20px;
+  }
+
+  ion-label {
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
+  }
+
+  .scan-button {
+    background-color: #2a195c;
+    font-weight: 600;
+    bottom: 16px;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    border-radius: 38px;
+    display: flex;
+    font-size: 17px;
+    color: #fff;
+    height: 50px;
+    margin-top: 50px;
+  }
+}

@@ -1,0 +1,16 @@
+<ion-content class="ion-padding">
+  <div class="walletFieldw">
+    <ion-label>Withdraw Amount</ion-label>
+    <ion-input label="₹" type="number" placeholder="Enter Amount" name="withdrawAmount" ngDefaultControl
+      [(ngModel)]="withdrawAmount"></ion-input>
+  </div>
+  <article>
+    <h6>Note:</h6>
+    <p>1.If there is an extra charges in your account,your withdraw request will be declined</p>
+    <p>2.You need to do KYC at our city office to be able to withdraw amount. Address is KYX Page.</p>
+    <p>3.Amount will be paid directly to you or an alternate way will be intimate beforehand</p>
+  </article>
+</ion-content>
+<ion-footer>
+  <ion-button class="success" (click)="withdrawAmounts(withdrawAmount)">Withdraw</ion-button>
+</ion-footer>

@@ -1,0 +1,137 @@
+<!-- Header Start -->
+<ion-header>
+  <app-child-header [onBack]="backToHome"></app-child-header>
+</ion-header>
+<!-- Header End -->
+<!-- Main Content Start -->
+<ion-content>
+
+  <section>
+    <div class="map">
+      <app-map [showSearchControls]="false" [rideActive]="true" [deviceCoordinates]="{latitude, longitude}"
+        [callingFromHome]="false"></app-map>
+    </div>
+    <ion-row>
+      <ion-col size="12" class="innerCard" *ngIf="unlockingRide === false">
+        <ion-col size="12" class="unlocking-ride-container compact"
+          *ngIf="disableLockUnlockControl === true && showTempLockButton === true">
+          <p class="unlocking-message">Please wait while we lock your ride...</p>
+        </ion-col>
+        <ion-col size="12" class="unlocking-ride-container compact"
+          *ngIf="disableLockUnlockControl === true && showUnlockButton === true">
+          <p class="unlocking-message">Please wait while we unlock your ride...</p>
+        </ion-col>
+        <section>
+          <ion-row>
+            <ion-col size="12" class="lockUnlockContainer" *ngIf="autoLockUnlockAllowed === true">
+              <input type="checkbox" id="auto-lock-unlock" name="auto-lock-unlock"
+                (change)="handleAutoLockUnlockChange()" [checked]="autoLockUnlock">
+              <label for="auto-lock-unlock">Auto Lock/Unlock Vehicle, On/Off Light (testing purpose)</label><br>
+            </ion-col>
+
+            <ion-col size="12" class="ion-text-center">
+              <h6 class="timeRemainHead">Current Ride Time <span class="timeCount">{{ rideTimerCounter }}</span></h6>
+            </ion-col>
+            <ion-col size="6">
+              <ion-card class="device-card">
+                <ion-icon class="ionic-icon-card" name="battery-full"></ion-icon>
+                <section class="device-section">
+                  <h4>Battery</h4>
+                  <p>{{battery}}%</p>
+                </section>
+              </ion-card>
+            </ion-col>
+
+            <ion-col size="6">
+
+              <ion-card class="light-control-card" [disabled]="disableLightOnOffControl">
+
+                <div class="column">
+                  <h4>Light</h4>
+                  <ion-icon name="bulb-outline"></ion-icon>
+                </div>
+
+                <div class="column">
+
+                  <h4 *ngIf="+lightStatus === enumCodeConstants.deviceLightOn">On</h4>
+                  <h4 *ngIf="+lightStatus === enumCodeConstants.deviceLightOff">Off</h4>
+
+                  <label class="switchToggle">
+                    <button class="toggleInput" [class.checked]="+lightStatus === enumCodeConstants.deviceLightOn"
+                      (click)="handleLightToggleControlClick()" [disabled]="disableLightOnOffControl"></button>
+                    <span class="slider round"></span>
+                  </label>
+                  <p *ngIf="disableLightOnOffControl === true">{{turningLightOnOffSeconds}}sec(s)</p>
+                </div>
+
+              </ion-card>
+
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-card class="device-card">
+                <ion-icon name="git-compare"></ion-icon>
+                <section class="device-section">
+                  <h4>Distance</h4>
+                  <p>{{distanceTraveled}} km</p>
+                </section>
+              </ion-card>
+            </ion-col>
+            <ion-col size="6">
+              <ion-card class="device-card">
+                <ion-icon name="speedometer"></ion-icon>
+                <section class="device-section">
+                  <h4>Current Speed</h4>
+                  <p>{{topspeed}} km/h</p>
+                </section>
+              </ion-card>
+            </ion-col>
+
+          </ion-row>
+        </section>
+
+      </ion-col>
+    </ion-row>
+    <ion-row class="footerBtn" *ngIf="unlockingRide === false">
+      <!-- <ion-col size="12" class="unlocking-ride-container compact"
+        *ngIf="disableLockUnlockControl === true && showTempLockButton === true">
+        <p class="unlocking-message">Please wait while we lock your ride...</p>
+      </ion-col> -->
+      <!-- <ion-col size="12" class="unlocking-ride-container compact"
+        *ngIf="disableLockUnlockControl === true && showUnlockButton === true">
+        <p class="unlocking-message">Please wait while we unlock your ride...</p>
+      </ion-col> -->
+    </ion-row>
+    <ion-row *ngIf="unlockingRide === true" class="unlockAlert">
+      <ion-col size="12" class="unlocking-ride-container">
+        <p class="unlocking-message">Please wait while we unlock your ride...</p>
+      </ion-col>
+    </ion-row>
+  </section>
+</ion-content>
+<ion-footer>
+  <ion-row class="p-10" *ngIf="unlockingRide === true">
+    <ion-button class="mcancel" color="danger" (click)="handleCancelControlClick()">Cancel</ion-button>
+  </ion-row>
+  <ion-row class="btn-row" *ngIf="unlockingRide === false">
+    <ion-col size="6" class="ion-text-center">
+
+      <ion-button class="lockBtn" (click)="showConfirmationAlert(rideDetailsControlTypeConstants.TEMP_LOCK)"
+        *ngIf="showTempLockButton === true" [disabled]="disableLockUnlockControl === true">Lock
+        <span *ngIf="disableLockUnlockControl === true"> - {{unlockingSeconds}}sec(s)</span>
+      </ion-button>
+
+      <ion-button class="lockBtn" *ngIf="showUnlockButton === true"
+        (click)="showConfirmationAlert(rideDetailsControlTypeConstants.UNLOCK)"
+        [disabled]="disableLockUnlockControl === true">Unlock
+        <span *ngIf="disableLockUnlockControl === true"> - {{unlockingSeconds}}sec(s)</span>
+      </ion-button>
+
+    </ion-col>
+    <ion-col size="6" class="ion-text-center">
+      <ion-button expand="block" color="danger"
+        (click)="showConfirmationAlert(rideDetailsControlTypeConstants.END_RIDE)" class="mt-3">End Ride</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+<!-- Main Content End -->

@@ -1,0 +1,112 @@
+<ion-menu side="start" type="overlay" menuId="first" content-id="content" class="modern-sidenav">
+  <ion-header class="ion-no-border">
+    <div class="user-profile-hero">
+      <div class="hero-overlay"></div>
+      <img src="assets/images/god_bg.jpg" class="side-hero-img" />
+      
+      <div class="user-info-glass" (click)="navigateToUser()">
+        <figure class="avatar-container">
+          <img [src]="profileAvatarUrl || 'assets/images/avatar1.png'" alt="user" />
+          <div class="status-online"></div>
+        </figure>
+        <article>
+          <h5 class="user-name">{{_userDetails?.userName}}</h5>
+          <p class="user-meta">{{_userDetails?.emailId || _userDetails?.mobile}}</p>
+        </article>
+        <ion-icon name="chevron-forward-circle" class="go-icon"></ion-icon>
+      </div>
+    </div>
+  </ion-header>
+
+  <ion-content class="side-content">
+    <div class="side-wrap">
+      <div class="stats-grid">
+        <div class="stat-card active" (click)="navigateMenu('/home/Wallet')">
+          <span class="stat-label">Wallet</span>
+          <span class="stat-value">₹{{_userDetails?.walletAmount || 0}}</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Distance</span>
+          <span class="stat-value">{{_userDetails?.totalDistanceInKm || 0}} <small>km</small></span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Rides</span>
+          <span class="stat-value">{{_userDetails?.totalRide || 0}}</span>
+        </div>
+      </div>
+
+      <h5 class="section-divider">Account & Activity</h5>
+      <div class="menu-list-card">
+        <button class="menu-item" (click)="navigateMenu('/home/Wallet')">
+          <div class="icon-wrap wallet-bg"><ion-icon name="wallet"></ion-icon></div>
+          <span class="label">Add Balance</span>
+          <ion-icon name="chevron-forward" class="arrow"></ion-icon>
+        </button>
+        
+        <button class="menu-item" (click)="navigateMenu('/home/paymentHistory')">
+          <div class="icon-wrap history-bg"><ion-icon name="receipt"></ion-icon></div>
+          <span class="label">Payment History</span>
+          <ion-icon name="chevron-forward" class="arrow"></ion-icon>
+        </button>
+
+        <button class="menu-item" (click)="navigateMenu('/home/referralCode')">
+          <div class="icon-wrap gift-bg"><ion-icon name="gift"></ion-icon></div>
+          <span class="label">Referral Rewards</span>
+          <ion-icon name="chevron-forward" class="arrow"></ion-icon>
+        </button>
+      </div>
+
+      <h5 class="section-divider">Support & Legal</h5>
+      <div class="menu-list-card">
+        <button class="menu-item" (click)="navigateMenu('/home/faqs')">
+          <div class="icon-wrap help-bg"><ion-icon name="help-buoy"></ion-icon></div>
+          <span class="label">FAQs</span>
+          <ion-icon name="chevron-forward" class="arrow"></ion-icon>
+        </button>
+        <button class="menu-item" (click)="navigateMenu('/home/getHelp')">
+          <div class="icon-wrap chat-bg"><ion-icon name="chatbubble-ellipses"></ion-icon></div>
+          <span class="label">Get Help</span>
+          <ion-icon name="chevron-forward" class="arrow"></ion-icon>
+        </button>
+      </div>
+
+      <button class="logout-action" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <span>Logout Account</span>
+      </button>
+    </div>
+  </ion-content>
+
+  <ion-footer class="ion-no-border">
+    <div class="side-footer">
+      <small>App Version {{version}}</small>
+    </div>
+  </ion-footer>
+</ion-menu>
+
+<ion-router-outlet id="content"></ion-router-outlet>
+
+<ion-header class="topHeader ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button (click)="openMenu()"></ion-menu-button>
+     
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<div class="notification-overlay" *ngIf="showNotificationsPanel" (click)="closeNotifications()">
+  <div class="notification-panel" (click)="$event.stopPropagation()">
+    <div class="panel-head">
+      <h4>Notifications</h4>
+      <button (click)="closeNotifications()"><ion-icon name="close-outline"></ion-icon></button>
+    </div>
+    <div class="panel-body">
+      <article class="notification-item" *ngFor="let item of notificationItems">
+        <h5>{{ item.title }}</h5>
+        <p>{{ item.message }}</p>
+        <span>{{ item.time }}</span>
+      </article>
+    </div>
+  </div>
+</div>

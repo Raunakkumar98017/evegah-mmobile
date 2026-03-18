@@ -1,0 +1,21 @@
+<!--
+  @author: Lokesh Rajput
+  @date: 4 Oct -2021
+  @decs.: login page design
+ -->
+<!-- header -->
+<ion-header>
+  <app-header [someInput]="inputValue" (onSearchControlClick)="handleSearchControlClick()"></app-header>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <app-map [showSearchControls]="showSearchControl" [rideActive]="showContinueToRideControl"
+    [deviceCoordinates]="deviceCoordinates" [callingFromHome]="true"></app-map>
+</ion-content>
+
+<button class="scan-button" (click)="navigateQr()" *ngIf="showContinueToRideControl === false">
+  <ion-icon name="qr-code-outline"></ion-icon>
+  Scan
+</button>
+<button class="scan-button" (click)="continueToRide()" *ngIf="showContinueToRideControl === true">
+  Continue to ride
+</button>

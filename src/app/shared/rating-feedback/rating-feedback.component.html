@@ -1,0 +1,65 @@
+<div class="rating-feedback-container">
+
+  <h3 class="title">Rating and Feedback</h3>
+
+  <!-- show this section in feedbackSubmitted is true -->
+  <div class="feedback-submitted-section" *ngIf="_feedbackSubmitted">
+    <ion-icon name="checkmark-circle" class="checkIcon"></ion-icon>
+    <ion-label class="feedbackLabel">Feedback Submitted</ion-label>
+  </div>
+
+  <!-- show this section in feedbackSubmitted is false -->
+  <div *ngIf="!_feedbackSubmitted">
+
+    <!-- show this section if rating feedback is not submitted yet -->
+    <div class="rating-feedback-section" *ngIf="showStaticContent === false">
+      <div class="rating-label-container">
+        <div class="rating-container">
+          <div *ngFor="let item of starRatingArray">
+            <!-- <ion-icon [attr.name]="rating >= item ? 'star' : 'star-outline'" [class.filled]="rating >= item"
+            (click)="ratingHandler(item)"></ion-icon> -->
+            <span [class.active]="rating === item.count" (click)="ratingHandler(item)">{{item.emoji}}</span>
+          </div>
+        </div>
+        <label class="rating-label" *ngIf="rating !== 0">{{starRatingArray[rating - 1].label}}</label>
+      </div>
+
+      <div>
+        <ion-label class="label">Feedback</ion-label>
+        <ion-textarea placeholder="Enter feedback" rows="4" name="feedback" ngDefaultControl
+          [(ngModel)]="feedback"></ion-textarea>
+      </div>
+
+      <ion-row>
+        <ion-col>
+          <button class="skip-button" (click)="skipHandler($event)">Skip</button>
+        </ion-col>
+        <ion-col>
+          <button class="submit-button" (click)="submitFeedbackHandler()">Submit</button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <!-- show this section if rating feedback is already submitted -->
+    <div class="rating-feedback-section" *ngIf="showStaticContent === true">
+
+      <div class="rating-label-container">
+        <div class="rating-container">
+          <div *ngFor="let item of starRatingArray">
+            <!-- <ion-icon [attr.name]="+_rideDetails?.ride_rating >= item ? 'star' : 'star-outline'"
+            [class.filled]="+_rideDetails?.ride_rating >= item"></ion-icon> -->
+            <span [class.active]="+_rideDetails?.ride_rating === item.count">{{item.emoji}}</span>
+          </div>
+        </div>
+        <label class="rating-label">{{starRatingArray[+_rideDetails?.ride_rating - 1].label}}</label>
+      </div>
+
+      <label class=" feedbackText" *ngIf="_rideDetails?.rideComments"><span>You:</span>
+        {{_rideDetails?.rideComments}}</label>
+
+      <label class="replyText" *ngIf="_rideDetails?.rideCommentsReply"><span>Admin:</span>
+        {{_rideDetails?.rideCommentsReply}}</label>
+
+    </div>
+
+  </div>

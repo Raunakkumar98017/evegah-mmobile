@@ -1,0 +1,55 @@
+<ion-header class="childHeadermain">
+  <app-child-header [title]="'FAQs'" [onBack]="onBack"></app-child-header>
+</ion-header>
+<ion-content class="faq-page">
+
+  <!-- no faqs section -->
+  <div class="noFaqsSection" *ngIf="faqs.length === 0">
+    <label>No Faqs available!</label>
+  </div>
+
+  <!-- faqs exist section -->
+  <div *ngIf="faqs.length !== 0">
+
+    <!-- searchbox container -->
+    <div class="searchBoxContainer">
+
+      <label class="noteLabel">Note: Type minimum 3 characters for searching FAQs.</label>
+
+      <ion-searchbar placeholder="How can we help?" class="faqSearchBar" (ionInput)="handleSearchInput($event)"
+        value="{{searchQuery}}"></ion-searchbar>
+
+      <!-- search results container -->
+      <div class="searchResultsContainer" *ngIf="displaySearchResults === true">
+
+        <!-- no search result section -->
+        <div class="noFaqsSection" *ngIf="filteredQuestionsList.length === 0">
+          <label>No search results found!</label>
+        </div>
+
+        <!-- search results list -->
+        <div class="searchResultsList" *ngIf="filteredQuestionsList.length !== 0">
+
+          <div class="searchResultItem" *ngFor="let item of filteredQuestionsList">
+            <div class="searchResultItemContent" (click)="handelSearchResultClick(item)">
+              <span>{{item.sectionName}} >> </span>
+              <label>{{item.question}}</label>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- faq section container -->
+    <div class="faqSectionContainer">
+      <div class="faqSection" *ngFor="let section of faqs" (click)="handleSectionClick(section)">
+        <label>{{section.sectionName}}</label>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

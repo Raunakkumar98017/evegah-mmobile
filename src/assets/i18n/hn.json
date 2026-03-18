@@ -1,0 +1,22 @@
+{
+  "greet": {
+    "welcome": "स्वागत हे"
+  },
+  "common": {
+    "iAgreeTo": "मैं इसके लिए सहमत हूँ",
+    "termsAndCondition": "उपयोग की शर्तें और गोपनीयता नीति",
+    "pleaseWait": "कृपया प्रतीक्षा करें..."
+  },
+  "actions": {
+    "next": "अगला"
+  },
+  "messages": {
+    "inCorrectMobileNumber": "यह फ़ोन नंबर अमान्य है, कृपया पुन: प्रयास करें।"
+  },
+  "sessionPages": {
+    "mobileNumberPage": {
+      "info": "जारी रखने के लिए अपना फ़ोन नंबर दर्ज करें, हम आपको सत्यापित करने के लिए ओटीपी भेजेंगे।",
+      "placeholder": "फोन नंबर दर्ज करें"
+    }
+  }
+}
