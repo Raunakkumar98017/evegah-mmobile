@@ -51,15 +51,15 @@ ion-header {
     font-size: 15px;
     font-family: 'Poppins', sans-serif !important;
     --font-family: 'Poppins', sans-serif !important;
-    color: #666;
-    font-weight: 500;
+    color: #2e313d;
+    font-weight: 600;
   }
 
   .value {
     flex: 1 1 auto;
     text-align: end;
-    font-weight: 600;
-    color: #2e313d;
+    font-weight: 500;
+    color: #666;
     min-width: 0;
 
     &.wrap-prevent {

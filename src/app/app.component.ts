@@ -3,15 +3,14 @@ import { AuthService } from './service/auth.service';
 import { Router } from '@angular/router';
 import { IonRouterOutlet, Platform, AlertController } from '@ionic/angular';
 
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Subscription } from 'rxjs';
 import { TOASTER_CONSTANTS } from 'src/app/core/constants/common-constant';
 import { ToasterService } from 'src/app/core/services/toaster.service';
 import { PaymentService } from '../app/core/services/payment.service';
 import { VehicleModelService } from '../app/core/services/Vehicle-services';
 import { LocalStorageService } from './core/services/local-storage.service';
-import { LocationService } from './core/services/location.service';
 import storageKeyNameConstants from './core/constants/storage-keyname-constants';
+import { GMapsService } from './core/services/gmaps.services';
 import { App } from '@capacitor/app';
 
 @Component({
@@ -33,7 +32,7 @@ export class AppComponent {
     public VehicleModel: VehicleModelService,
     private localStorageService: LocalStorageService,
     public alertController: AlertController,
-    private locationService: LocationService
+    private gmapsService: GMapsService
   ) {
     this.initializeApp();
     this.platform.backButton.subscribeWithPriority(-1, () => {
@@ -47,7 +46,7 @@ export class AppComponent {
     const registrationStatus = this.localStorageService.getItem(storageKeyNameConstants.REGISTRATION_STATUS);
 
     this.platform.ready().then(() => {
-      this.locationService.init();
+      this.gmapsService.loadGoogleMaps().catch(() => {});
       if (otpMatched === true && registrationStatus === true && userDetails) {
         this.router.navigate(['home']);
       } else {
