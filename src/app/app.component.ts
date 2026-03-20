@@ -10,6 +10,7 @@ import { ToasterService } from 'src/app/core/services/toaster.service';
 import { PaymentService } from '../app/core/services/payment.service';
 import { VehicleModelService } from '../app/core/services/Vehicle-services';
 import { LocalStorageService } from './core/services/local-storage.service';
+import { LocationService } from './core/services/location.service';
 import storageKeyNameConstants from './core/constants/storage-keyname-constants';
 import { App } from '@capacitor/app';
 
@@ -31,7 +32,8 @@ export class AppComponent {
     private platform: Platform,
     public VehicleModel: VehicleModelService,
     private localStorageService: LocalStorageService,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private locationService: LocationService
   ) {
     this.initializeApp();
     this.platform.backButton.subscribeWithPriority(-1, () => {
@@ -40,19 +42,18 @@ export class AppComponent {
   }
 
   initializeApp() {
-
     const otpMatched = this.localStorageService.getItem(storageKeyNameConstants.OTP_MATCH);
     const userDetails = this.localStorageService.getItem(storageKeyNameConstants.USER_DETAILS, true);
     const registrationStatus = this.localStorageService.getItem(storageKeyNameConstants.REGISTRATION_STATUS);
 
     this.platform.ready().then(() => {
+      this.locationService.init();
       if (otpMatched === true && registrationStatus === true && userDetails) {
         this.router.navigate(['home']);
       } else {
         this.router.navigateByUrl('session');
       }
     });
-
   }
 
   exitApp() {

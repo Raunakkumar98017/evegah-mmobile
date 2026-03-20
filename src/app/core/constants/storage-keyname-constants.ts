@@ -7,6 +7,7 @@ const storageKeyNameConstants = {
   MOBILE_NUMBER: 'MN',
   USER_ID: 'UI',
   LAST_MAP_STATE: 'LMS',
+  LAST_KNOWN_COORDINATES: 'last_known_coordinates',
   USER_AVATAR: 'UAV',
   SESSION_IS_USER: 'SIS',
   REGISTRATION_STATUS: 'RS',

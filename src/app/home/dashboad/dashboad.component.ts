@@ -17,7 +17,7 @@ import { StateManagementService } from 'src/app/core/services/stateManagement.se
 import { VehicleModelService } from 'src/app/core/services/Vehicle-services';
 import intervalPeriodConstants from 'src/app/core/constants/interval-period-constants';
 import { GMapsService } from 'src/app/core/services/gmaps.services';
-import { Geolocation } from '@capacitor/geolocation';
+import { LocationService } from 'src/app/core/services/location.service';
 @Component({
   selector: 'app-dashboad',
   templateUrl: './dashboad.component.html',
@@ -47,7 +47,8 @@ export class DashboadComponent implements OnInit {
     public localStorageService: LocalStorageService,
     private sessionStorageService: SessionStorageService,
     private stateManagementService: StateManagementService,
-    private gmapsService: GMapsService
+    private gmapsService: GMapsService,
+    private locationService: LocationService
   ) { }
 
   ionViewWillEnter() {
@@ -66,21 +67,8 @@ export class DashboadComponent implements OnInit {
 
   ngOnInit() {
     this.userDetails = this.localStorageService.getItem(storageKeyNameConstants.USER_DETAILS);
-    this.ensureLocationPermissionPrompt();
+    this.locationService.init();
     this.gmapsService.loadGoogleMaps().catch(() => { });
-  }
-
-  private async ensureLocationPermissionPrompt() {
-    try {
-      const permission = await Geolocation.checkPermissions();
-      const hasPermission = permission.location === 'granted' || permission.coarseLocation === 'granted';
-
-      if (!hasPermission) {
-        await Geolocation.requestPermissions();
-      }
-    } catch {
-      // Keep dashboard usable even if permission API is unavailable.
-    }
   }
 
   navigateQr() {

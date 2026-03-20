@@ -50,17 +50,19 @@
   .rating-container {
     display: flex;
     justify-content: center;
-    font-size: 37px;
-    column-gap: 12px;
+    align-items: center;
+    font-size: 44px;
+    column-gap: 14px;
     color: #848482;
 
     span {
       opacity: 0.5;
+      cursor: pointer;
     }
 
     .active {
       opacity: 1;
-      font-size: 42px;
+      font-size: 50px;
     }
 
     .filled {

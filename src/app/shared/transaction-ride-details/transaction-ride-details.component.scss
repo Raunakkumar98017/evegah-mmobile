@@ -1,6 +1,6 @@
  ion-header {
    display: flex;
-   padding: 15px;
+   padding: 15px 16px;
    border-bottom: 1px solid rgba(0, 216, 0, 0.3215686275);
 
    ion-title {
@@ -9,44 +9,84 @@
      --font-family: 'Poppins', sans-serif !important;
    }
 
-   ion-icon {
-     font-size: 30px;
-     color: red;
+   .close-icon {
+     font-size: 32px;
+     min-width: 40px;
+     min-height: 40px;
+     padding: 4px;
+     color: #c00;
    }
  }
 
- ion-content {
+ .ride-details-content {
    font-family: 'Poppins', sans-serif !important;
    --font-family: 'Poppins', sans-serif !important;
+   --padding-start: 16px;
+   --padding-end: 16px;
+   --padding-bottom: 20px;
+ }
 
-   .brandLogo {
-     width: 150px;
-     margin: 15px auto 20px;
-     text-align: center;
-     display: block;
-   }
+ .brandLogo {
+   width: 160px;
+   height: auto;
+   margin: 16px auto 24px;
+   display: block;
+   object-fit: contain;
+ }
+
+ .itemDetails {
+   --padding-start: 0;
+   --inner-padding-end: 0;
+   --min-height: 48px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 12px 0;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 
    ion-label {
-     font-size: 16px;
+     font-size: 15px;
      font-family: 'Poppins', sans-serif !important;
      --font-family: 'Poppins', sans-serif !important;
-     color: #777;
+     white-space: normal;
+   }
+
+   .label {
+     flex: 0 1 48%;
+     color: #666;
+     font-weight: 500;
    }
 
    .value {
+     flex: 1 1 auto;
      font-weight: 600;
      color: #2e313d;
-   }
+     text-align: end;
+     min-width: 0;
 
-   .seeMoreLessControl {
-     --background: transparent;
-     color: #848482;
-     margin: 0 0 10px 0;
-     font-weight: 600;
-     font-size: 15px !important;
+     &.wrap-prevent {
+       white-space: nowrap;
+       overflow: hidden;
+       text-overflow: ellipsis;
+       max-width: 100%;
+     }
    }
+ }
 
-   .horizontalDivision {
-     border-bottom: 1px solid rgba(0, 216, 0, 0.32156862);
-   }
+ .seeMoreLessControl {
+   --background: transparent;
+   color: #848482;
+   margin: 12px 0 16px 0;
+   font-weight: 600;
+   font-size: 15px !important;
+ }
+
+ .horizontalDivision {
+   border-bottom: 1px solid rgba(0, 216, 0, 0.32156862);
+   margin: 16px 0;
+ }
+
+ app-rating-feedback {
+   display: block;
+   padding-top: 8px;
  }

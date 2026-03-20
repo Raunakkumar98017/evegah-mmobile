@@ -1,16 +1,12 @@
 <ion-header class="modalHeader">
   <ion-toolbar>
     <ion-title>Ride Details</ion-title>
-    <ion-icon name="close-outline" (click)="closeModal()"></ion-icon>
+    <ion-icon name="close-outline" class="close-icon" (click)="closeModal()"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-img
-    class="brandLogo"
-    alt="logo"
-    src="https://admin.evegah.com/assets/images/EVfinalicon.svg"
-  ></ion-img>
+<ion-content class="ride-details-content">
+  <img class="brandLogo" alt="logo" src="assets/vechicle.png" />
 
   <ion-list class="ion-no-padding">
 
@@ -20,7 +16,7 @@
     </ion-item>
 
     <ion-item lines="none" class="itemDetails">
-      <ion-label class="label">Modal Name</ion-label>
+      <ion-label class="label">Model Name</ion-label>
       <ion-label class="value">{{rideDetails.modelName}}</ion-label>
     </ion-item>
 
@@ -33,11 +29,11 @@
 
       <ion-item lines="none" class="itemDetails">
         <ion-label class="label">Ride started from</ion-label>
-        <ion-label class="value">{{fromTime}}</ion-label>
+        <ion-label class="value wrap-prevent">{{fromTime}}</ion-label>
       </ion-item>
       <ion-item lines="none" class="itemDetails">
         <ion-label class="label">Ride ended at</ion-label>
-        <ion-label class="value">{{endTime}}</ion-label>
+        <ion-label class="value wrap-prevent">{{endTime}}</ion-label>
       </ion-item>
       <ion-item lines="none" class="itemDetails">
         <ion-label class="label">Ride Duration (minutes)</ion-label>

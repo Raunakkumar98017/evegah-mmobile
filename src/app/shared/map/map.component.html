@@ -27,6 +27,18 @@
       <label>We're initializing your map. Hang on just a moment...</label>
     </div>
 
+    <div *ngIf="showLocationPermissionSection && callingFromHome" class="location-permission-section">
+      <label>Location helps us show nearby eVegah zones. Enable location to find vehicles.</label>
+      <div class="permission-button-controls">
+        <ion-button expand="block" class="current-location-button" (click)="requestLocationPermission()">
+          Enable Location
+        </ion-button>
+        <ion-button expand="block" fill="outline" class="refresh-location-btn" (click)="refreshLocationStatus()">
+          Refresh Status
+        </ion-button>
+      </div>
+    </div>
+
   </div>
 
 </div>

@@ -1,7 +1,7 @@
 ion-header {
   background-color: transparent !important;
   display: flex;
-  padding: 15px;
+  padding: 15px 16px;
   border-bottom: 1px solid rgba(0, 216, 0, 0.3215686275);
 
   ion-title {
@@ -10,38 +10,64 @@ ion-header {
     --font-family: 'Poppins', sans-serif !important;
   }
 
-  ion-icon {
-    font-size: 30px;
-    color: red;
+  .close-icon {
+    font-size: 32px;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 4px;
+    color: #c00;
   }
 }
 
-ion-content {
+.ride-details-content {
   font-family: 'Poppins', sans-serif !important;
   --font-family: 'Poppins', sans-serif !important;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-bottom: 20px;
 }
 
 .brandLogo {
-  width: 150px;
-  margin: 15px auto 20px;
-  text-align: center;
+  width: 160px;
+  height: auto;
+  margin: 16px auto 24px;
   display: block;
+  object-fit: contain;
 }
 
 .itemDetails {
   font-size: 17px;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 
   .label {
-    font-size: 16px;
+    flex: 0 1 48%;
+    font-size: 15px;
     font-family: 'Poppins', sans-serif !important;
     --font-family: 'Poppins', sans-serif !important;
-    color: #777;
+    color: #666;
+    font-weight: 500;
   }
 
   .value {
+    flex: 1 1 auto;
     text-align: end;
     font-weight: 600;
     color: #2e313d;
+    min-width: 0;
+
+    &.wrap-prevent {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
   }
 }
 

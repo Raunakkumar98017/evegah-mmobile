@@ -32,6 +32,9 @@ const messageConstants = {
   thanksForFeedback: 'Thank you for sharing your feedback! Your insights are invaluable to us and contribute to making our services even better.',
   cameraPermissionMessage: 'Enable camera permissions in your app settings to activate Scan QR feature.',
   locationPermissionMessage: 'Enable location permissions in your app settings to activate Map feature.',
+  locationPermissionDeniedMessage: 'Location access helps us show nearby eVegah zones and improve your ride experience. Please enable location in your device settings to use the map and find vehicles.',
+  locationFetchTimeout: 'Getting your location is taking longer than expected. Please ensure GPS is on and try again.',
+  locationGpsDisabled: 'Location unavailable. Please turn on GPS/Location services and try again.',
 };
 
 export default messageConstants;

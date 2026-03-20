@@ -8,6 +8,7 @@ import { NativeSettings, AndroidSettings, IOSSettings } from 'capacitor-native-s
 import intervalPeriodConstants from 'src/app/core/constants/interval-period-constants';
 import messageConstants from 'src/app/core/constants/message-constants';
 import { GMapsService } from 'src/app/core/services/gmaps.services';
+import { LocationService } from 'src/app/core/services/location.service';
 import { StateManagementService } from 'src/app/core/services/stateManagement.service';
 import { zoneService } from 'src/app/core/services/zone.services';
 import { environment } from 'src/environments/environment';
@@ -55,7 +56,6 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
     longitude: 73.1812
   };
   private readonly lastMapStateStorageKey = storageKeyNameConstants.LAST_MAP_STATE;
-  private readonly lastKnownCoordinatesStorageKey = 'last_known_coordinates';
 
   @ViewChild('mapReference', { static: true }) mapElementRef!: ElementRef;
   @ViewChild('searchboxReference', { static: true }) searchBoxElementRef!: ElementRef;
@@ -100,7 +100,8 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
     private zoneService: zoneService,
     public alertController: AlertController,
     public loadingController: LoadingController,
-    private stateManagementService: StateManagementService
+    private stateManagementService: StateManagementService,
+    private locationService: LocationService
   ) { }
 
   ngOnInit() {
@@ -146,7 +147,7 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
       if (this._rideActive === true) {
         coordinates = this.deviceCoordinates;
       } else {
-        coordinates = this.getStoredLastKnownCoordinates() || this.fallbackMapCenter;
+        coordinates = this.locationService.getLocationForMap();
       }
 
       const initialLocation = new googleMaps.LatLng(coordinates.latitude, coordinates.longitude);
@@ -154,7 +155,7 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
 
       this.map = new googleMaps.Map(mapElement, {
         center: initialLocation,
-        zoom: 17,
+        zoom: 12,
         disableDefaultUI: true,
         zoomControl: true,
       });
@@ -166,7 +167,7 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
         }
         const lat = center.lat();
         const lng = center.lng();
-        const zoom = this.map?.getZoom?.() || 17;
+        const zoom = this.map?.getZoom?.() || 12;
         this.setMapPreview(lat, lng, zoom);
       });
 
@@ -180,17 +181,18 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
       this.getCurrentAddress(initialLocation, true, { showLoader: false });
 
       if (this._rideActive === false) {
+        const hasPermission = await this.locationService.checkPermission();
+        this.locationPermissionGranted = hasPermission;
+        this.showLocationPermissionSection = !hasPermission;
+
         this.handleCurrentLocationInterval(googleMaps);
 
-        this.getCurrentLocation().then((location) => {
-          if (!location?.coords || !this.map || !this.currentLocationMarker || !this.googleMaps) {
+        this.locationService.fetchAndStoreLocation().then((stored) => {
+          if (!stored || !this.map || !this.currentLocationMarker || !this.googleMaps) {
             return;
           }
-
-          this.currentLocation = location;
-          const coords = location.coords;
-          const updatedLocation = new this.googleMaps.LatLng(coords.latitude, coords.longitude);
-
+          this.currentLocation = { coords: stored };
+          const updatedLocation = new this.googleMaps.LatLng(stored.latitude, stored.longitude);
           this.currentLocationMarker.setPosition(updatedLocation);
           this.map.setCenter(updatedLocation);
           this.getCurrentAddress(updatedLocation, true, { showLoader: false });
@@ -290,60 +292,22 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
     this.currentLocationMarker?.setIcon(icon);
 
     this.map.setCenter({ lat, lng });
-    this.map.setZoom(17);
+    this.map.setZoom(12);
 
   }
 
   async requestLocationPermission() {
-
-    try {
-      const permission = await Geolocation.requestPermissions();
-
-      if (permission.location === 'granted' || permission.coarseLocation === 'granted') {
-        this.showAlert('Location Permission is enabled. Click on Refresh Location Status button.');
-      } else {
-
-        const alert = await this.alertController.create({
-          header: 'Alert',
-          message: messageConstants.locationPermissionMessage,
-          buttons: [
-            {
-              text: 'Cancel',
-              role: 'cancel',
-              handler: () => {
-                alert.dismiss();
-              }
-            },
-            {
-              text: 'Open',
-              handler: () => {
-                NativeSettings.open({
-                  optionAndroid: AndroidSettings.ApplicationDetails,
-                  optionIOS: IOSSettings.App
-                });
-              }
-            },
-          ],
-        });
-
-        await alert.present();
-
-      }
-
-    } catch (error) {
-      const errorMessage =
-        (error as any)?.message ||
-        (error as any)?.error?.message ||
-        'Unable to request location permission. Please try again.';
-      this.showAlert(errorMessage);
+    const granted = await this.locationService.requestPermission();
+    if (granted) {
+      this.showAlert('Location Permission is enabled. Click on Refresh Location Status button.');
+    } else {
+      await this.locationService.showPermissionDeniedAlert();
     }
   }
 
   async refreshLocationStatus() {
-
-    const permission = await Geolocation.checkPermissions();
-
-    if (permission.location === 'granted' || permission.coarseLocation === 'granted') {
+    const granted = await this.locationService.checkPermission();
+    if (granted) {
       this.showLocationPermissionSection = false;
       this.locationPermissionGranted = true;
       this.loading = true;
@@ -352,43 +316,19 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
       this.showLocationPermissionSection = true;
       this.locationPermissionGranted = false;
     }
-
   }
 
-  async getCurrentLocation() {
+  async getCurrentLocation(): Promise<{ coords: { latitude: number; longitude: number } } | null> {
+    const allowed = await this.locationService.checkPermission();
+    if (!allowed) return null;
 
-    const allowed = await this.checkLocationPermission();
-
-    if (!allowed) {
-      return null;
-    }
-
-    try {
-      const location = await Geolocation.getCurrentPosition({
-        enableHighAccuracy: false,
-        timeout: 10000,
-        maximumAge: 12000
-      });
-      this.persistLastKnownCoordinates(location?.coords);
-      return location;
-    } catch {
-      try {
-        const location = await Geolocation.getCurrentPosition({
-          enableHighAccuracy: true,
-          timeout: 15000,
-          maximumAge: 8000
-        });
-        this.persistLastKnownCoordinates(location?.coords);
-        return location;
-      } catch {
-        return null;
-      }
-    }
-
+    const stored = await this.locationService.fetchAndStoreLocation();
+    if (!stored) return null;
+    return { coords: { latitude: stored.latitude, longitude: stored.longitude } };
   }
 
-  async checkLocationPermission() {
-    return new Promise(async (resolve, reject) => {
+  async _checkLocationPermission() {
+    return new Promise<boolean>(async (resolve) => {
       try {
 
         const permission = await Geolocation.checkPermissions();
@@ -455,7 +395,7 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
         this.map.fitBounds(place.geometry.viewport);
       } else {
         this.map.setCenter(place.geometry.location);
-        this.map.setZoom(17);
+        this.map.setZoom(12);
       }
 
       const currentAddress = this.getCountryStateCityForSearchedLocation(place);
@@ -483,7 +423,7 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
           this.map.fitBounds(place.geometry.viewport);
         } else if (place.geometry?.location) {
           this.map.setCenter(place.geometry.location);
-          this.map.setZoom(17);
+          this.map.setZoom(12);
         }
 
         const currentAddress = this.getCountryStateCityForSearchedLocation(place);
@@ -778,7 +718,7 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
     const location = new this.googleMaps.LatLng(+coordinates.latitude, +coordinates.longitude);
 
     this.map.setCenter(location);
-    this.map.setZoom(17);
+    this.map.setZoom(12);
 
     this.getCurrentAddress(location, true);
 
@@ -924,14 +864,14 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
       return {
         lat: parsedMapState.lat,
         lng: parsedMapState.lng,
-        zoom: typeof parsedMapState?.zoom === 'number' ? parsedMapState.zoom : 16
+        zoom: typeof parsedMapState?.zoom === 'number' ? parsedMapState.zoom : 12
       };
     } catch {
       return null;
     }
   }
 
-  private setMapPreview(lat?: number, lng?: number, zoom: number = 16) {
+  private setMapPreview(lat?: number, lng?: number, zoom: number = 12) {
     const safeLat = typeof lat === 'number' ? lat : this.fallbackMapCenter.latitude;
     const safeLng = typeof lng === 'number' ? lng : this.fallbackMapCenter.longitude;
     const staticMapStyle = encodeURIComponent('feature:poi|visibility:off');
@@ -942,45 +882,6 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
 
     try {
       localStorage.setItem(this.lastMapStateStorageKey, JSON.stringify({ lat: safeLat, lng: safeLng, zoom }));
-    } catch {
-      // Ignore storage errors.
-    }
-  }
-
-  private getStoredLastKnownCoordinates(): { latitude: number; longitude: number } | null {
-    try {
-      const rawCoordinates = localStorage.getItem(this.lastKnownCoordinatesStorageKey);
-      if (!rawCoordinates) {
-        return null;
-      }
-
-      const parsedCoordinates = JSON.parse(rawCoordinates);
-      if (
-        typeof parsedCoordinates?.latitude !== 'number' ||
-        typeof parsedCoordinates?.longitude !== 'number'
-      ) {
-        return null;
-      }
-
-      return {
-        latitude: parsedCoordinates.latitude,
-        longitude: parsedCoordinates.longitude
-      };
-    } catch {
-      return null;
-    }
-  }
-
-  private persistLastKnownCoordinates(coords: any) {
-    if (typeof coords?.latitude !== 'number' || typeof coords?.longitude !== 'number') {
-      return;
-    }
-
-    try {
-      localStorage.setItem(
-        this.lastKnownCoordinatesStorageKey,
-        JSON.stringify({ latitude: coords.latitude, longitude: coords.longitude })
-      );
     } catch {
       // Ignore storage errors.
     }

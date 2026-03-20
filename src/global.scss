@@ -520,7 +520,7 @@ input:-internal-autofill-selected {
   position: relative !important;
   background-color: transparent !important;
   display: flex;
-  padding: 15px;
+  padding: 15px 16px;
   border-bottom: 1px solid rgba(0, 216, 0, 0.3215686275);
 
   ion-title {
@@ -528,9 +528,12 @@ input:-internal-autofill-selected {
     color: #000;
   }
 
-  ion-icon {
-    font-size: 30px;
-    color: red;
+  ion-icon,
+  .close-icon {
+    font-size: 32px;
+    min-width: 40px;
+    min-height: 40px;
+    color: #c00;
   }
 }
 
