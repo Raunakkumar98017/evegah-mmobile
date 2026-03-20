@@ -27,9 +27,9 @@ const activeRideMarker = {
 };
 
 const evegahZoneMarker = {
-  icon: 'assets/vechicle.png',
-  sizeX: 54,
-  sizeY: 54
+  icon: 'assets/images/evegah-zone-1.png',
+  sizeX: 44,
+  sizeY: 44
 };
 
 const mapStylesOptions = [
@@ -90,10 +90,13 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
   lastMapPreviewUrl = '';
   locationPermissionGranted = false;
   zoneMarkers: any[] = [];
-  private readonly zoneCacheDurationMs = 5 * 60 * 1000;
+  private readonly zoneCacheDurationMs = 2 * 60 * 1000;
   private readonly zoneCache = new Map<string, { at: number; data: any[] }>();
   private zoneFetchInFlight = false;
   private queuedZoneFetchOptions: { showLoader?: boolean } | null = null;
+  private readonly geocodeCacheDurationMs = 10 * 60 * 1000;
+  private readonly geocodeCache = new Map<string, { country: string; state: string; city: string; at: number }>();
+  private readonly fallbackAddress = { country: 'India', state: 'Gujarat', city: 'Vadodara' };
 
   constructor(
     private gmapsService: GMapsService,
@@ -178,15 +181,23 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
       this.bindDirectionService(googleMaps);
 
       this.addCurrentLocationMarker(initialLocation);
-      this.getCurrentAddress(initialLocation, true, { showLoader: false });
+
+      // Immediately fetch zones for fallback/cached area while GPS resolves
+      this.currentAddress = { ...this.fallbackAddress };
+      this.getNearbyZones({ showLoader: false });
+
+      this.loading = false;
+      this.mapLoadWarning = '';
 
       if (this._rideActive === false) {
-        const hasPermission = await this.locationService.checkPermission();
-        this.locationPermissionGranted = hasPermission;
-        this.showLocationPermissionSection = !hasPermission;
+        this.locationService.checkPermission().then((hasPermission) => {
+          this.locationPermissionGranted = hasPermission;
+          this.showLocationPermissionSection = !hasPermission;
+        });
 
         this.handleCurrentLocationInterval(googleMaps);
 
+        // Fetch fresh GPS location and update map + zones in one step
         this.locationService.fetchAndStoreLocation().then((stored) => {
           if (!stored || !this.map || !this.currentLocationMarker || !this.googleMaps) {
             return;
@@ -197,11 +208,12 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
           this.map.setCenter(updatedLocation);
           this.getCurrentAddress(updatedLocation, true, { showLoader: false });
         }).catch(() => {
+          // GPS failed, geocode from initial (cached/fallback) location for correct zones
+          this.getCurrentAddress(initialLocation, true, { showLoader: false });
         });
+      } else {
+        this.getCurrentAddress(initialLocation, true, { showLoader: false });
       }
-
-      this.loading = false;
-      this.mapLoadWarning = '';
 
     } catch (error) {
       console.log(error);
@@ -471,8 +483,8 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
     this.subscription.push(
       this.zoneService.getNearbyZones(country, state, city)
         .pipe(
-          timeout(15000),
-          retry({ count: 2, delay: 1200 }),
+          timeout(8000),
+          retry({ count: 1, delay: 300 }),
           finalize(async () => {
             if (showLoader) {
               await this.safeDismissLoading();
@@ -511,34 +523,20 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   async addEvegahZonesMarkers() {
-    let googleMaps: any = this.googleMaps;
+    const googleMaps: any = this.googleMaps;
 
     this.clearZoneMarkers();
 
-    this.zones.map(async (zone) => {
-
+    this.zones.forEach((zone) => {
       const zoneLocation = new googleMaps.LatLng(zone.latitude, zone.longitude);
-      const advancedMarker = this.createAdvancedZoneMarker(googleMaps, zoneLocation);
 
-      if (advancedMarker) {
-        advancedMarker.addListener('gmp-click', (event: any) => {
-          const mapsMouseEvent = { latLng: event?.latLng || zoneLocation };
-          this.handleMarkerClick(mapsMouseEvent, false, zone);
-        });
-        advancedMarker.map = this.map;
-        this.zoneMarkers.push(advancedMarker);
-        return;
-      }
-
-      const zoneIcon = {
-        url: evegahZoneMarker.icon,
-        scaledSize: new googleMaps.Size(evegahZoneMarker.sizeX, evegahZoneMarker.sizeY),
-      };
-
-      const marker = await new googleMaps.Marker({
+      const marker = new googleMaps.Marker({
         position: zoneLocation,
         map: this.map,
-        icon: zoneIcon,
+        icon: {
+          url: evegahZoneMarker.icon,
+          scaledSize: new googleMaps.Size(evegahZoneMarker.sizeX, evegahZoneMarker.sizeY),
+        },
       });
 
       marker.addListener('click', (mapsMouseEvent: any) => {
@@ -546,44 +544,6 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
       });
 
       this.zoneMarkers.push(marker);
-
-    });
-
-  }
-
-  private createAdvancedZoneMarker(googleMaps: any, position: any) {
-    const AdvancedMarkerElement = googleMaps?.marker?.AdvancedMarkerElement;
-    if (!AdvancedMarkerElement) {
-      return null;
-    }
-
-    const content = document.createElement('div');
-    content.style.width = `${evegahZoneMarker.sizeX}px`;
-    content.style.height = `${evegahZoneMarker.sizeY}px`;
-    content.style.borderRadius = '50%';
-    content.style.background = '#6c45be';
-    content.style.boxShadow = '0 10px 22px rgba(0,0,0,0.18)';
-    content.style.border = '3px solid #ffffff';
-    content.style.display = 'flex';
-    content.style.alignItems = 'center';
-    content.style.justifyContent = 'center';
-
-    const img = document.createElement('img');
-    img.src = evegahZoneMarker.icon;
-    img.alt = 'vehicle';
-    img.style.width = '72%';
-    img.style.height = '72%';
-    img.style.objectFit = 'contain';
-    img.style.borderRadius = '50%';
-    img.style.display = 'block';
-    img.style.pointerEvents = 'none';
-
-    content.appendChild(img);
-
-    return new AdvancedMarkerElement({
-      position,
-      content,
-      zIndex: 10
     });
   }
 
@@ -725,57 +685,107 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   getCurrentAddress(location: any, shouldFetchZones: boolean = true, zoneFetchOptions: { showLoader?: boolean } = {}) {
+    const lat = typeof location?.lat === 'function' ? location.lat() : location?.lat;
+    const lng = typeof location?.lng === 'function' ? location.lng() : location?.lng;
+
+    if (lat == null || lng == null || (typeof lat !== 'number') || (typeof lng !== 'number')) {
+      this.currentAddress = { ...this.fallbackAddress };
+      if (shouldFetchZones) {
+        this.getNearbyZones(zoneFetchOptions);
+      }
+      return;
+    }
+
+    // Fast path: fallback coords = Vadodara, skip geocoding and fetch zones immediately
+    if (lat != null && lng != null && Math.abs(lat - this.fallbackMapCenter.latitude) < 0.0001 &&
+        Math.abs(lng - this.fallbackMapCenter.longitude) < 0.0001) {
+      this.currentAddress = { ...this.fallbackAddress };
+      if (shouldFetchZones) {
+        this.getNearbyZones(zoneFetchOptions);
+      }
+      return;
+    }
+
+    // Fast path: use cached geocode result for same ~1km area
+    const cacheKey = `${(lat ?? 0).toFixed(2)}_${(lng ?? 0).toFixed(2)}`;
+    const cached = this.geocodeCache.get(cacheKey);
+    const now = Date.now();
+    if (cached && now - cached.at <= this.geocodeCacheDurationMs) {
+      this.currentAddress = { country: cached.country, state: cached.state, city: cached.city };
+      if (shouldFetchZones) {
+        this.getNearbyZones(zoneFetchOptions);
+      }
+      return;
+    }
+
+    if (!this.geocoder) {
+      this.currentAddress = { ...this.fallbackAddress };
+      if (shouldFetchZones) {
+        this.getNearbyZones(zoneFetchOptions);
+      }
+      return;
+    }
 
     this.geocoder.geocode({ 'latLng': location }, (results: any, status: any) => {
-      if (status == google.maps.GeocoderStatus.OK && results?.length !== 0) {
+      let country = null, city = null, state = null;
 
-        let country = null, city = null, state = null;
+      if (status === 'OK' && results?.length !== 0) {
         let c, lc, component;
 
         for (let r = 0, rl = results.length; r < rl; r += 1) {
-          let result = results[r];
+          const result = results[r];
+          if (!result?.address_components) continue;
 
-          if (!city && result.types[0] === 'locality') {
+          if (!city && result.types?.[0] === 'locality') {
             for (c = 0, lc = result.address_components.length; c < lc; c += 1) {
               component = result.address_components[c];
-
-              if (component.types[0] === 'locality') {
+              if (component?.types?.[0] === 'locality') {
                 city = component.long_name;
                 break;
               }
             }
-          } else if (!city && (result.types[0] === 'administrative_area_level_2' || result.types[0] === 'sublocality_level_1')) {
+          } else if (!city && (result.types?.[0] === 'administrative_area_level_2' || result.types?.[0] === 'sublocality_level_1')) {
             city = result.address_components[0]?.long_name || null;
-          } else if (!state && result.types[0] === 'administrative_area_level_1') {
+          } else if (!state && result.types?.[0] === 'administrative_area_level_1') {
             for (c = 0, lc = result.address_components.length; c < lc; c += 1) {
               component = result.address_components[c];
-
-              if (component.types[0] === 'administrative_area_level_1') {
+              if (component?.types?.[0] === 'administrative_area_level_1') {
                 state = component.long_name;
                 break;
               }
             }
-          } else if (!country && result.types[0] === 'country') {
-            country = result.address_components[0].long_name;
+          } else if (!country && result.types?.[0] === 'country') {
+            country = result.address_components[0]?.long_name || null;
           }
 
-          if (city && country && state) {
-            break;
+          if (city && country && state) break;
+        }
+
+        for (let r = 0; r < results.length; r += 1) {
+          const comps = results[r]?.address_components || [];
+          for (let i = 0; i < comps.length; i += 1) {
+            const t = comps[i]?.types?.[0];
+            if (t === 'country' && !country) country = comps[i].long_name;
+            if (t === 'administrative_area_level_1' && !state) state = comps[i].long_name;
+            if ((t === 'locality' || t === 'administrative_area_level_2') && !city) city = comps[i].long_name;
           }
+          if (country && state && city) break;
         }
+      }
 
-        this.currentAddress = {
-          country,
-          state,
-          city
-        };
+      const address = {
+        country: country || this.fallbackAddress.country,
+        state: state || this.fallbackAddress.state,
+        city: city || this.fallbackAddress.city
+      };
+      this.currentAddress = address;
 
-        if (shouldFetchZones) {
-          this.getNearbyZones(zoneFetchOptions);
-        }
+      // Cache geocode result for faster repeat lookups
+      const cacheKey = `${(lat ?? 0).toFixed(2)}_${(lng ?? 0).toFixed(2)}`;
+      this.geocodeCache.set(cacheKey, { ...address, at: Date.now() });
 
-      } else {
-        // this.showAlert(`Not able to fetch yor geolocation: ${status}`);
+      if (shouldFetchZones) {
+        this.getNearbyZones(zoneFetchOptions);
       }
     });
   }

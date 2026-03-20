@@ -20,12 +20,15 @@ export class zoneService {
     private localStorageService: LocalStorageService
   ) {
     this.serverUrl = environment.serverUrl;
-    this.access_token = this.localStorageService.getItem(storageKeyNameConstants.USER_DETAILS).access_token;
+    const userDetails = this.localStorageService.getItem(storageKeyNameConstants.USER_DETAILS, true);
+    this.access_token = userDetails?.access_token || userDetails?.accessToken || '';
   }
 
   getNearbyZones(country: string, state: string, city: string) {
-    this.access_token = this.localStorageService.getItem(storageKeyNameConstants.USER_DETAILS).access_token;
-    const url = `${this.serverUrl}v1/getzoneDetailWithBikeCountList?zoneId=0&mapCityId=0&mapCountryName=${country}&mapStateName=${state}&mapCityName=${city}&dataFor=ForMapSearch&access_token=${this.access_token}`
+    const userDetails = this.localStorageService.getItem(storageKeyNameConstants.USER_DETAILS, true);
+    this.access_token = userDetails?.access_token || userDetails?.accessToken || this.access_token || '';
+    const enc = (s: string) => encodeURIComponent(s || '');
+    const url = `${this.serverUrl}v1/getzoneDetailWithBikeCountList?zoneId=0&mapCityId=0&mapCountryName=${enc(country)}&mapStateName=${enc(state)}&mapCityName=${enc(city)}&dataFor=ForMapSearch&access_token=${enc(this.access_token)}`;
     return this.http.get<any>(url);
   }
 

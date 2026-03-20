@@ -12,8 +12,8 @@ export interface StoredLocation {
   timestamp: number;
 }
 
-const LOCATION_FETCH_TIMEOUT_MS = 12000;
-const LOCATION_FETCH_RETRY_TIMEOUT_MS = 15000;
+const LOCATION_FETCH_TIMEOUT_MS = 5000;
+const LOCATION_FETCH_RETRY_TIMEOUT_MS = 8000;
 const FALLBACK_COORDS = { latitude: 22.3072, longitude: 73.1812 };
 
 @Injectable({ providedIn: 'root' })
@@ -111,24 +111,27 @@ export class LocationService {
   }
 
   private async fetchWithRetry(): Promise<StoredLocation | null> {
+    // Fast attempt: accept any recent cached position (up to 60s old)
     try {
       const pos = await Geolocation.getCurrentPosition({
         enableHighAccuracy: false,
         timeout: LOCATION_FETCH_TIMEOUT_MS,
-        maximumAge: 15000
+        maximumAge: 60000
+      });
+      const stored = this.toStored(pos?.coords);
+      if (stored) return stored;
+    } catch { /* fall through to retry */ }
+
+    // Retry with high accuracy and shorter cache
+    try {
+      const pos = await Geolocation.getCurrentPosition({
+        enableHighAccuracy: true,
+        timeout: LOCATION_FETCH_RETRY_TIMEOUT_MS,
+        maximumAge: 30000
       });
       return this.toStored(pos?.coords);
     } catch {
-      try {
-        const pos = await Geolocation.getCurrentPosition({
-          enableHighAccuracy: true,
-          timeout: LOCATION_FETCH_RETRY_TIMEOUT_MS,
-          maximumAge: 8000
-        });
-        return this.toStored(pos?.coords);
-      } catch {
-        return null;
-      }
+      return null;
     }
   }
 

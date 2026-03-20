@@ -1,10 +1,10 @@
 <ion-content [fullscreen]="true" class="main-content" scroll-y="false">
   <div class="login-container">
-    
+
     <div class="hero-section">
       <img src="../../../assets/images/login_page_b.jpeg" class="hero-img" />
       <div class="overlay-gradient"></div>
-      
+
       <div class="brand-content">
         <img src="../../../assets/images/EV-final-logo1.png" class="evegah-title-text" />
         <p class="tagline">India's Smartest EV Mobility</p>
@@ -13,7 +13,7 @@
 
     <div class="login-sheet">
       <div class="sheet-handle"></div>
-      
+
       <div class="sheet-body">
         <h2 class="welcome-text">Login or Signup</h2>
         <p class="helper-text">Enter your phone number to get started</p>
@@ -23,16 +23,11 @@
             <img src="https://flagcdn.com/w40/in.png" class="flag" />
             <span class="code">+91</span>
           </div>
-          
+
           <div class="vertical-divider"></div>
-          
-          <ion-input 
-            type="tel" 
-            maxlength="10" 
-            placeholder="99887 76655" 
-            [(ngModel)]="mobileNumber"
-            (keyup)="handleEnterKeyEvent($event)"
-            class="phone-input">
+
+          <ion-input type="tel" maxlength="10" placeholder="99887 76655" [(ngModel)]="mobileNumber"
+            (keyup)="handleEnterKeyEvent($event)" class="phone-input">
           </ion-input>
         </div>
 
@@ -45,15 +40,16 @@
           <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
         </button>
 
-        <button class="btn-biometric" *ngIf="showBiometricLogin" (click)="loginWithBiometric()" [disabled]="biometricLoading || isLoading">
+        <button class="btn-biometric" *ngIf="showBiometricLogin" (click)="loginWithBiometric()"
+          [disabled]="biometricLoading || isLoading">
           <ion-icon name="finger-print-outline"></ion-icon>
           <span *ngIf="!biometricLoading">Login with Biometrics</span>
           <ion-spinner name="crescent" *ngIf="biometricLoading"></ion-spinner>
         </button>
 
         <p class="terms-text">
-          By continuing, you agree to our 
-          <a (click)="navigateMenu('/home/privacyPolicy')">Terms</a> & 
+          By continuing, you agree to our
+          <a (click)="navigateMenu('/home/privacyPolicy')">Terms</a> &
           <a (click)="navigateMenu('/home/privacyPolicy')">Privacy Policy</a>
         </p>
       </div>
