@@ -22,8 +22,8 @@ const currentLocationMarker = {
 
 const activeRideMarker = {
   icon: 'assets/images/ride-marker.png',
-  sizeX: 60,
-  sizeY: 60
+  sizeX: 120,
+  sizeY: 120
 };
 
 const evegahZoneMarker = {
