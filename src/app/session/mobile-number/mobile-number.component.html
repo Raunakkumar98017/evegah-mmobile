@@ -1,20 +1,20 @@
 <ion-content [fullscreen]="true" class="main-content" scroll-y="false">
-  <div class="login-container">
+  <div class="login-page-wrapper">
 
+    <!-- Full Screen Background -->
     <div class="hero-section">
       <img src="../../../assets/images/login_page_b.jpeg" class="hero-img" />
       <div class="overlay-gradient"></div>
+    </div>
 
+    <!-- Centered Glass Card -->
+    <div class="glass-login-card">
       <div class="brand-content">
         <img src="../../../assets/images/EV-final-logo1.png" class="evegah-title-text" />
         <p class="tagline">India's Smartest EV Mobility</p>
       </div>
-    </div>
 
-    <div class="login-sheet">
-      <div class="sheet-handle"></div>
-
-      <div class="sheet-body">
+      <div class="card-body">
         <h2 class="welcome-text">Login or Signup</h2>
         <p class="helper-text">Enter your phone number to get started</p>
 
@@ -22,6 +22,7 @@
           <div class="country-trigger">
             <img src="https://flagcdn.com/w40/in.png" class="flag" />
             <span class="code">+91</span>
+            <ion-icon name="chevron-down-outline" class="dropdown-icon"></ion-icon>
           </div>
 
           <div class="vertical-divider"></div>
@@ -59,5 +60,10 @@
       </div>
     </div>
 
+    <!-- Background Decorative Elements -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
   </div>
-</ion-content>
+</ion-content>

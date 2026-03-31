@@ -1,239 +1,295 @@
 $primary-brand: #2a195d;
-$text-main: #1c1c1c;
-$text-muted: #696969;
+$ev-purple-light: #6C5CE7;
 
 .main-content {
-  --background: #ffffff !important;
-  background-color: #ffffff !important;
+  --background: #000000 !important;
+  background-color: #000000 !important;
+  font-family: 'Outfit', sans-serif !important;
 }
 
-.login-container {
+.login-page-wrapper {
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #ffffff;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
 }
 
-// Hero Area
+// Full Screen Hero Background
 .hero-section {
-  position: relative;
-  height: 58vh;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: #000;
+  height: 100%;
+  z-index: 0;
 
   .hero-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(0.7) contrast(1.1);
   }
 
   .overlay-gradient {
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.1) 0%,
-      rgba(0, 0, 0, 0.65) 62%,
-      rgba(0, 0, 0, 0.88) 100%
+      135deg,
+      rgba(42, 25, 93, 0.6) 0%,
+      rgba(0, 0, 0, 0.8) 100%
     );
-  }
-
-  .brand-content {
-    position: absolute;
-    bottom: 85px;
-    left: 24px;
-    right: 24px;
-
-    .evegah-title-text {
-      color: #fff;
-      font-size: 44px;
-      font-weight: 900;
-      margin: -5px;
-      letter-spacing: -1.5px;
-      margin-bottom: 8px;
-      width: 200px;
-    }
-
-    .tagline {
-      color: rgba(255, 255, 255, 0.85);
-      font-size: 14px;
-      font-weight: 600;
-      margin: 0;
-      letter-spacing: 0.3px;
-    }
   }
 }
 
-// Login Sheet (The Rest is Neumorphic-Minimal)
-.login-sheet {
-  flex: 1;
-  background: #ffffff;
-  margin-top: -60px;
-  border-radius: 32px 32px 0 0;
+// The Glass Card
+.glass-login-card {
+  position: relative;
   z-index: 10;
-  padding: 24px;
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 32px;
+  padding: 40px 28px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: cardEntrance 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
   display: flex;
   flex-direction: column;
-  box-shadow: none;
-  border-top: 1px solid #f1f2f6;
+  align-items: center;
+  text-align: center;
 
-  .sheet-handle {
-    width: 42px;
-    height: 4.5px;
-    background: #ececf0;
-    border-radius: 10px;
-    margin: -6px auto 24px;
+  .brand-content {
+    margin-bottom: 32px;
+
+    .evegah-title-text {
+      width: 140px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+
+    .tagline {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+  }
+
+  .card-body {
+    width: 100%;
   }
 
   .welcome-text {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 800;
-    color: $text-main;
+    color: #ffffff;
     margin: 0;
     letter-spacing: -0.5px;
   }
 
   .helper-text {
-    font-size: 15px;
-    color: $text-muted;
-    margin: 8px 0 28px;
-    font-weight: 500;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 12px 0 32px;
+    font-weight: 400;
   }
 }
 
 .input-capsule {
   display: flex;
   align-items: center;
-  border: 1.5px solid #ebebeb;
-  border-radius: 18px;
-  height: 62px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  height: 64px;
   padding: 0 16px;
   transition: all 0.3s ease;
-  background: #fdfdfd;
 
   &:focus-within {
-    border-color: $primary-brand;
-    box-shadow: 0 0 0 4px rgba($primary-brand, 0.05);
-    background: #fff;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
   }
 
   .country-trigger {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+
+    .button-icon {
+      color: #fff;
+      font-size: 12px;
+    }
 
     .flag {
-      width: 26px;
-      border-radius: 4px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      width: 24px;
+      border-radius: 3px;
     }
 
     .code {
       font-weight: 700;
-      color: $text-main;
+      color: #ffffff;
       font-size: 17px;
+    }
+
+    .dropdown-icon {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 14px;
     }
   }
 
   .vertical-divider {
-    width: 1.5px;
-    height: 26px;
-    background: #eeeeee;
-    margin: 0 18px;
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 16px;
   }
 
   .phone-input {
+    flex: 1;
     --padding-start: 0;
+    --color: #ffffff;
+    --placeholder-color: rgba(255, 255, 255, 0.3);
     font-size: 19px;
-    font-weight: 700;
-    color: $text-main;
-    letter-spacing: 1.2px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: left;
   }
 }
 
 .btn-continue {
   width: 100%;
-  height: 58px;
-  background: $primary-brand;
-  color: #fff;
+  height: 60px;
+  background: linear-gradient(90deg, #6C5CE7 0%, #2A195C 100%);
+  color: #ffffff;
   border-radius: 18px;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 700;
   margin-top: 24px;
   border: none;
-  box-shadow: 0 10px 25px rgba($primary-brand, 0.3);
+  box-shadow: 0 10px 20px rgba(42, 25, 93, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:active {
-    transform: scale(0.98);
-    opacity: 0.9;
+    transform: scale(0.96);
   }
 
   &:disabled {
-    background: #f2f2f2;
-    color: #b5b5b5;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.2);
     box-shadow: none;
   }
 }
 
+.btn-biometric {
+  width: 100%;
+  height: 54px;
+  background: transparent;
+  color: #ffffff;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  &:active {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
 .error-msg {
+  color: #ff4757;
+  font-size: 13px;
+  margin-top: 8px;
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #e53935;
-  font-size: 12.5px;
-  font-weight: 600;
-  margin: 10px 0 0 4px;
 }
 
 .terms-text {
-  text-align: center;
   font-size: 12px;
-  color: $text-muted;
-  margin-top: 22px;
-  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 32px;
+  line-height: 1.5;
 
   a {
-    color: $primary-brand;
-    font-weight: 800;
-    text-decoration: none;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 
 .version-footer {
-  margin-top: auto;
-  text-align: center;
+  margin-top: 40px;
   font-size: 10px;
   font-weight: 700;
-  color: #e0e0e0;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  padding-top: 10px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 2px;
 }
 
-.btn-biometric {
-  width: 100%;
-  height: 52px;
-  background: #ffffff;
-  color: $primary-brand;
-  border-radius: 16px;
-  font-size: 16px;
-  font-weight: 700;
-  margin-top: 12px;
-  border: 1.5px solid rgba($primary-brand, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+// Decorative Background Blobs
+.bg-blob {
+  position: absolute;
+  z-index: 1;
+  filter: blur(100px);
+  border-radius: 50%;
+  pointer-events: none;
+}
 
-  &:disabled {
-    opacity: 0.6;
+.blob-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(108, 92, 231, 0.2);
+  top: -100px;
+  right: -100px;
+  animation: float 15s infinite alternate;
+}
+
+.blob-2 {
+  width: 300px;
+  height: 300px;
+  background: rgba(42, 25, 93, 0.3);
+  bottom: -50px;
+  left: -50px;
+  animation: float 12s infinite alternate-reverse;
+}
+
+.blob-3 {
+  width: 250px;
+  height: 250px;
+  background: rgba(255, 255, 255, 0.05);
+  top: 40%;
+  left: 20%;
+  animation: float 10s infinite;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
   }
-
-  ion-icon {
-    font-size: 20px;
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
+
+@keyframes float {
+  from { transform: translate(0, 0); }
+  to { transform: translate(30px, 40px); }
+}
